@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+    <link rel="stylesheet" href="./radio.css">
+  </head>
+  <body>
+    <div class="box">
+      <div class="option">
+        <a href="javascript:;">男</a>
+        <a href="javascript:;">女</a>
+        <a href="javascript:;">保密</a>
+      </div>
+    </div>
+    <script>
+      /*
+       for循环添加点击事件
+        点击某个按钮之后，先判断当前点击这个是否有class
+          有：清除这个class（显示来回切换）
+          没有：再找到对应点击的那个按钮 给它单独加上 class checked
+      
+      */
+      const btns=document.querySelectorAll('.option a');
+
+// 方法一：
+      // //  for 添加点击事件
+      // for(let i=0; i<btns.length; i++){
+      //   btns[i].onclick=function(){
+      //     // 点击某个按钮之后，先判断当前点击这个是否有class，
+      //     if(this.className){
+      //       this.className='';
+      //     }else{
+      //        //  点击某一个按钮之后 先将 所有按钮class 都变为空
+      //       for(let i=0; i<btns.length; i++){
+      //         btns[i].className='';
+      //       }
+      //         //  再找到对应点击的那个按钮 给它单独加上 class checked
+      //       this.className='checked';
+      //     }
+      //   }
+      // }
+// 方法二
+      // for(let i=0; i<btns.length; i++){
+      //   btns[i].onclick= function(){
+      //     console.log(i)
+      //     for(let j=0; j<btns.length; j++){
+      //       if(j!==i){
+      //         btns[j].classList.remove('checked');
+      //       }
+      //     }
+      //     this.classList.toggle('checked'); 
+      //    }
+
+      // }
+// 方法三：
+      // for(var i=0; i<btns.length; i++){
+      //   const h=i;
+      //   btns[i].onclick= function(){
+      //     for(let j=0; j<btns.length; j++){
+      //       if(j!==h){
+      //         btns[j].classList.remove('checked');
+      //       }
+      //     }
+      //     this.classList.toggle('checked'); 
+      //    }
+
+      // }
+
+      // 方法四 ：判断当前点击的是不是上一次点击的，进行判断（记录上一次）
+      let ht='';
+      for(let i=0; i<btns.length; i++){
+        btns[i].onclick=function(){
+          ht && ht!==this && ht.classList.remove('checked');
+          ht=this;
+          this.classList.toggle('checked');
+        }
+      }
+    </script>
+  </body>
+</html>
