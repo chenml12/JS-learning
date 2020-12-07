@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>擦出图片</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: rgb(211, 241, 213);
+        }
+        .wrap{
+            position: relative;
+            width: 590px;
+            margin: 100px auto;
+            position: relative;
+            
+        }
+        .wrap div{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            /* background: url(./img.jpg); */
+            background-color: rgb(98, 133, 95);
+            background-size: 1000% 1000%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap"></div>
+    <script>
+        // 1. 给 wrap 元素 添加  innerHTML 
+        // 2. for循环 生成100个div 
+       
+      
+        var wrap=document.querySelector('.wrap');
+        let str='';
+        for(var i=0; i<10; i++){
+           for(var j=0; j<10; j++){
+              str+='<div style="left:'+j*60+'px;top:'+i*60+'px; background-position:-'+j*60+'px -'+i*60+'px;"></div>'
+           }
+          
+        }
+        wrap.innerHTML=str;
+
+        const divs=wrap.querySelectorAll('div');
+
+         //存储显示了多少个背景图
+        let count=0;
+
+        
+    //    1. 给所有的div添加事件
+    //    2. 鼠标移入事件  onmouseover  
+    //    3. 鼠标移入 让事件元素本身 背景图路径发生变化
+
+        for(let i=0; i<divs.length; i++){
+             // 自定义属性
+            divs[i].showImg=false;
+            divs[i].onmouseover=function(){
+                 // 如果div没有显示背景图 就给count加1
+                if(this.showImg==false){
+                    count++;
+                    this.showImg=true;
+                }
+                if(count==100){
+                    console.log('图片显示完成！')
+                }
+                this.style.backgroundImage='url(img.jpg)';
+               
+            }
+        }
+    </script>
+</body>
+</html>
