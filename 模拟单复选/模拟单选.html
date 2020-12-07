@@ -71,8 +71,13 @@
       let ht='';
       for(let i=0; i<btns.length; i++){
         btns[i].onclick=function(){
-          ht && ht!==this && ht.classList.remove('checked');
+          
+          if(ht && ht!==this ){
+            ht.classList.remove('checked'); 
+          }
           ht=this;
+          // ht && ht!==this && ht.classList.remove('checked');
+          // ht=this;
           this.classList.toggle('checked');
         }
       }

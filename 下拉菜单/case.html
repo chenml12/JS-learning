@@ -121,7 +121,14 @@
             }
             onOff=!onOff;    
         }
-
+        var lis=list.querySelectorAll('li');
+        for(let i=0; i<lis.length; i++){
+            lis[i].onclick=function(){
+               title.innerHTML= this.innerHTML;
+               list.style.display='none';
+               onOff=true;
+            }
+        }
     </script>
 </body>
 </html>
