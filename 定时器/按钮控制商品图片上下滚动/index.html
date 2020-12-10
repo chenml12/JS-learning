@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,div,h2,h3,ul,li,p{
+            padding: 0;
+            margin: 0;
+        }
+        h2,h3{
+            font-size: 14px;
+        }
+        .clearfix:after{
+            content:".";        
+            display:block;        
+            height:0;        
+            clear:both;        
+            visibility:hidden;        
+
+        }
+        a{
+            text-decoration: none;
+        }
+        #box{
+            width: 200px;
+            height: 470px;
+            border:1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px auto 0;
+           
+        }
+        h2{
+            height: 30px;
+            line-height: 30px;
+            padding: 0 6px;
+            color: #fff;
+            background: #294A73;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        h2 strong{
+            float: left;
+        }
+        h2 a{
+            color: #fff;
+            float: right;
+        }
+        .up{
+            height: 20px;
+            background:#EFEFE7 url(img/arrowUp.png) no-repeat center ;
+            /* #EFEFE7 url('./img2/arrowUp.png') no-repeat center */
+        }
+        .down{
+            height: 20px;
+            background:#EFEFE7 url(img/arrowDown.png) no-repeat center ;
+            /* #EFEFE7 url('./img2/arrowUp.png') no-repeat center */
+        }
+        #container{
+            height: 400px;
+            overflow:hidden;
+            position: relative;
+        }
+       #content{
+           padding: 0 10px;
+           position:absolute;
+           top: 0;
+       }
+       #content h3{
+           height: 30px;
+           line-height: 30px;
+       }
+       #content li{
+           border-bottom: 1px solid #eee;
+           padding: 4px 0;
+       }
+       .content-wrap{
+           font-size: 12px;
+          
+       }
+       .content-wrap .left{
+            width: 80px;
+            float: left;
+       }
+       .content-wrap  .time{
+        margin-top: 10px;
+        color: #ccc;
+       }
+       .content-wrap .right{
+            width: 100px;
+            float: right;
+       }
+       .content-wrap .right img{
+           width: 100%;
+       }
+
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h2>
+            <strong>这是标题</strong>
+            <a href="javascript:;">>>更多</a>
+        </h2>
+        <div class='up'></div>
+        <div id="container">
+            <ul id="content">
+                <li class="clearfix">
+                    <h3>标题一</h3>
+                    <div class="content-wrap">
+                        <div class="left">
+                            <p>
+                                Mac翻新产品iPod翻新产品
+                            </p>
+                            <p class="time">22:23</p>
+                        </div>
+                        <div class="right">
+                            <img src="img/ad1.png" alt="">
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <h3>标题一</h3>
+                    <div class="content-wrap">
+                        <div class="left">
+                            <p>
+                                Mac翻新产品iPod翻新产品
+                            </p>
+                            <p class="time">22:23</p>
+                        </div>
+                        <div class="right">
+                            <img src="img/ad1.png" alt="">
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <h3>标题一</h3>
+                    <div class="content-wrap">
+                        <div class="left">
+                            <p>
+                                Mac翻新产品iPod翻新产品
+                            </p>
+                            <p class="time">22:23</p>
+                        </div>
+                        <div class="right">
+                            <img src="img/ad1.png" alt="">
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <h3>标题一</h3>
+                    <div class="content-wrap">
+                        <div class="left">
+                            <p>
+                                Mac翻新产品iPod翻新产品
+                            </p>
+                            <p class="time">22:23</p>
+                        </div>
+                        <div class="right">
+                            <img src="img/ad1.png" alt="">
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <h3>标题一1111</h3>
+                    <div class="content-wrap">
+                        <div class="left">
+                            <p>
+                                Mac翻新产品iPod翻新产品
+                            </p>
+                            <p class="time">22:23</p>
+                        </div>
+                        <div class="right">
+                            <img src="img/ad1.png" alt="">
+                        </div>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+        <div class='down'></div>
+    </div>
+    <script>
+    //获取按钮，滚动内容
+    const up=document.querySelector('.up');
+    const down=document.querySelector('.down');
+    const content=document.getElementById('content');
+    var speed=2;
+    let timer=null;
+
+    up.onmousedown=function(){
+        if(getStyle(content,'bottom')<'0px'){
+            timer=setInterval(function(){
+                content.style.top=parseInt(getStyle(content,'top'))-speed+'px';
+                if(getStyle(content,'bottom')>'0px'){
+                    clearInterval(timer);
+                    console.log('到头了')
+                }
+            },30)
+            
+       }
+             
+    }
+    up.onmouseup=down.onmouseup=function(){
+        clearInterval(timer);
+    }
+    down.onmousedown=function(){
+        if(getStyle(content,'top')<='0px'){
+            timer=setInterval(function(){
+                content.style.top=parseInt(getStyle(content,'top'))+speed+'px';
+                if(getStyle(content,'top')>='0px'){
+                    clearInterval(timer);
+                    console.log('最上面了')
+                }
+            },30) 
+       }
+    }
+    
+    function getStyle(obj,attr){
+        if(obj.currentStyle){//认识currentStyle，则是IE浏览器
+            return obj.currentStyle[attr];//.不能传入变量，而[]可以传入变量
+        }else{
+            return getComputedStyle(obj)[attr];
+        }
+    }
+    </script>
+</body>
+</html>
