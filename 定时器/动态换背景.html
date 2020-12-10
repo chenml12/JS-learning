@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="换背景颜色">
+    <input type="button" value="停止">
+    <script>
+        var btns=document.querySelectorAll('input');
+        var body=document.body;
+        var colors=['red','yellow','pink','green'];
+        var timer=null;
+        var num=0;
+        btns[0].onclick=function(){
+            // clearInterval(timer);
+            timer=setInterval(function(){
+                body.style.backgroundColor=colors[num];
+                num++;
+                num%=colors.length;
+            },1000)
+        }
+        btns[1].onclick=function(){
+            clearInterval(timer);
+        }
+       
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+body { background:url(img/sina.jpg) no-repeat center 0; text-align:center; }
+img { display:none; }
+</style>
+
+</head>
+
+<body>
+<img id="win" src="img/win.png" />
+<script>
+	const win=document.getElementById('win');
+	let timer=null;
+	timer=setTimeout(function(){
+		win.style.display='inline-block';
+		setTimeout(function(){
+			win.style.display='none';
+		},3000)
+	},1000)
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#div{
+				position: relative;
+			}
+			#div div{
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				background-color: #ccc;
+			}
+			.active{
+				background-image: url(img.jpg)
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div"></div>
+		<script type="text/javascript">
+		//获取最外面的div
+			var div=document.getElementById('div');
+			var str='';
+			var len=100;
+			var num=0;//判断是否全部显示
+			//循环生成100个div
+			for(var i=0; i<len; i++){
+				//Math.floor
+				str+='<div style="top:'+Math.floor(i/10)*60+'px;left:'+Math.floor(i%10)*60+'px"></div>'
+			}
+			div.innerHTML=str;
+			// 获取生成的div
+			var divs=div.getElementsByTagName('div')
+			for(var i=0; i<len; i++){
+				divs[i].onOff=true;
+				//给div添加背景图
+				divs[i].style.backgroundPosition=-(i%10)*60+'px '+-Math.floor(i/10)*60+'px'
+				//添加鼠标移入事件
+				divs[i].onmouseover=function(){
+					
+					this.className='active';
+					if(!this.onOff){
+						num++;
+						this.onOff=false;
+					}
+					if(num>=100){
+						alert('显示完成')
+					}
+				}
+				
+			}
+			
+		</script>
+	</body>
+</html>

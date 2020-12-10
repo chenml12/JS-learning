@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+#qq { width:200px; height:400px; background:#F9C; }
+#title { width:240px; height:180px; background:#FC6; position:absolute; top:10px; left:220px; display:none; }
+</style>
+</head>
+<body>
+<div id="qq"></div>
+<div id="title"></div>
+<script>
+	const qq=document.getElementById('qq');
+	const title=document.getElementById('title');
+	qq.onmouseover=show;
+	qq.onmouseout=hide;
+	title.onmouseover=show;
+	title.onmouseout=hide;
+	var timer=null;
+	function show(){
+		clearTimeout(timer);
+		title.style.display='block';
+	}
+	function hide(){
+		timer=setTimeout(function(){
+			title.style.display='none';
+		},100)	
+	}	
+</script>
+</body>
+</html>
