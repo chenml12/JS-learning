@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>淘宝商品广告效果</title>
+	<style>
+		body,div,ul,li{
+			margin: 0;
+			padding: 0;
+		}
+		li{list-style:none;}
+		
+		#box{
+			
+			width: 316px;
+			height: 208px;
+			margin: 50px auto;
+			border: 1px solid #FF6300;
+		}
+		.left{
+			float: left;
+		}
+		ul{
+			padding:0 4px;
+			margin-top: 4px;
+		}
+		#box li{
+			width: 48px;
+			height: 28px;
+			line-height: 28px;
+			border: 1px solid #FFADAD;
+			text-align: center;
+			margin-bottom: 4px;
+		}
+		#box li.active{
+			background:#FF4A6B;
+			color:#fff;
+		}
+		#box img{
+			width: 200px;
+			height: 200px;
+			margin-top: 4px;
+		}
+		.right{
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul class="left"></ul>
+		<img id="pic" src="images/1.png" alt="">
+		<ul class="right"></ul>
+	</div>
+	<script>
+		var box=document.getElementById('box')
+		var uls=document.querySelectorAll('ul');
+		var pic=document.getElementById('pic');
+		var lis=box.getElementsByTagName('li');
+		var num=-1;
+		var timer=null;
+		var textArray=[
+			'凉鞋1','连衣裙','高跟鞋','T恤衫','衬衣','帽子','牛仔裤','外套','牛仔褂','运动鞋','皮鞋','球鞋'
+		];
+		var imgArray=['images/1.png','images/2.png','images/3.png','images/4.png','images/5.png','images/6.png',
+					'images/7.png','images/8.png','images/9.png','images/10.png','images/11.png','images/12.png'
+		];
+		//渲染li内容
+		for(var i=0; i<textArray.length; i++){
+			if(i>=textArray.length/2){
+				uls[1].innerHTML+='<li>'+textArray[i]+'</li>';
+			}else{
+				uls[0].innerHTML+='<li>'+textArray[i]+'</li>';
+			}
+		}
+		//默认打开就是循环播放
+		timer=setInterval(autoPlay,1000);
+
+		//循环li，给其添加鼠标移入事件
+		for(let i=0; i<lis.length; i++){
+			lis[i].index=i;
+			lis[i].onmouseover=function(){
+				//鼠标移入是清除定时器
+				clearInterval(timer);
+				clearAll()
+				this.className='active';
+				pic.src=imgArray[this.index];
+			}
+			//鼠标移出时定时器开启
+			lis[i].onmouseout=function(){
+				timer=setInterval(autoPlay,1000);
+				num=this.index;
+			}
+		}
+		//自动播放
+		function autoPlay(){
+			clearAll()
+			if(num>=lis.length-1){
+				num=-1;
+			}
+			num++;
+			lis[num].className='active';
+			pic.src=imgArray[num];
+		}
+		function clearAll(){
+			for(let i=0; i<lis.length; i++){
+				lis[i].className=''
+			}
+		}
+	</script>
+</body>
+</html>
