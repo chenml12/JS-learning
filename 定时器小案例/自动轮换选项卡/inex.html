@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    ul,h2{
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        list-style: none;
+    }
+    #box{
+        width: 600px;
+        height: 300px;
+        margin: 50px auto 0;
+        border: 2px solid #333333;
+        padding: 4px;
+    }
+    #nav{
+        height: 30px;
+    }
+    #nav li{
+        float: left;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        background: #d4d4d4;
+        text-align: center;
+        margin-right: 2px;
+    }
+    #nav li.active{
+        background: pink;
+    }
+    .div{
+        padding-top: 2px;
+        display: none;
+    }
+    .div img{
+        width: 480px;
+        height: 240px;
+        float: left;
+    }
+    .div ul{
+        float: left;
+        height: 250px;
+    }
+    .div li{
+        width: 120px;
+        height: 80px;
+        /* background: #fdfbfbf3; */
+        text-align: center;
+        line-height: 80px;
+    }
+    </style>
+    
+</head>
+<body>
+    <div id="box">
+        <ul id="nav">
+            <li>菜单一</li>
+            <li>菜单二</li>
+        </ul>
+        <div class="div">
+            <img src="./img/1.jpg"/>
+            <ul>
+                <li>图片1</li>
+                <li>图片2</li>
+                <li>图片3</li>
+            </ul>
+        </div>
+        <div class="div">
+            <img src="./img/4.jpg"/>
+            <ul>
+                <li>图片4</li>
+                <li>图片5</li>
+                <li>图片6</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const box=document.getElementById('box');
+        const navs=document.querySelectorAll('#nav li');
+        const divs=document.querySelectorAll('.div');
+        const imgs=document.querySelectorAll('img');//2个
+        const arrImg=['./img/1.jpg','./img/2.jpg','./img/3.jpg','./img/4.jpg','./img/5.jpg','./img/6.jpg'];
+          
+       const lis=document.querySelectorAll('.div li');
+        
+        //初始化
+        
+        var num=0;//控制主导航   0,1
+        var num2=0;//控制侧边导航   0,1,2,3,4,5
+        var timer=null;
+
+        autoPlay();
+     
+         //主导航切换
+        for(let i=0; i<navs.length; i++){
+            navs[i].index=i;
+                navFn(i);
+        }
+      //侧边导航栏切换
+      for(let i=0; i<lis.length; i++){
+            sideNav(i)
+      }
+      box.onmouseover=function(){
+          clearInterval(timer)
+      }
+      box.onmouseout=function(){
+        autoPlay();
+      }
+    
+      // 自动播放
+      function autoPlay(){
+        timer=setInterval(function(){
+            if(num2>=arrImg.length-1){
+                num2=-1;
+            }
+            num2++;
+            if(num2>=arrImg.length/2){
+                num=1
+           }else{
+                num=0;
+           }
+            navFn(num);
+            sideNav(num2);
+        },1000)
+     
+      }
+
+      //侧边栏导航
+      function sideNav(n){
+         for(let j=0; j<lis.length; j++){
+                lis[j].style.background='';
+            }
+            lis[n].style.background='pink';
+            //判断是第一页的图片还是第二页的
+            if(n<arrImg.length/2){
+                imgs[0].src=arrImg[n]
+            }else{
+                imgs[1].src=arrImg[n];
+            }
+      }
+      // 主导航函数封装
+      function navFn(m){
+            for(let j=0; j<navs.length; j++){
+                navs[j].className=''; 
+                divs[j].style.display='none';
+            }
+            navs[m].className='active';
+            divs[m].style.display='block';
+            if(m<arrImg.length/2){
+                lis[arrImg.length/2].style.background='pink';
+            }
+      }
+    </script>
+</body>
+</html>
