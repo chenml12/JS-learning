@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        position: absolute;
+        top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="domove.js"></script>
+    <script>
+      let str = "";
+      const len = 10;
+      let num = 0;
+      let timer = null;
+      var onOff = true;
+      var divs = document.getElementsByTagName("div");
+      for (let i = 0; i < len; i++) {
+        str += "<div style='left:" + 60 * i + "px'></div>";
+      }
+      document.body.innerHTML = str;
+      document.onclick = function () {
+        clearInterval(timer);
+
+        timer = setInterval(function () {
+          if (onOff && parseInt(getStyle(divs[len - 1], "top")) == 10) {
+            doMove(divs[num], "top", 12, 400);
+            num++;
+            if (num == len) {
+              clearInterval(timer);
+              num = 0;
+              onOff = false;
+            }
+          } else if (parseInt(getStyle(divs[len - 1], "top")) == 400) {
+            doMove(divs[num], "top", 12, 10);
+            num++;
+            if (num == len) {
+              clearInterval(timer);
+              num = 0;
+              onOff = true;
+            }
+          }
+        }, 100);
+      };
+    </script>
+  </body>
+</html>
