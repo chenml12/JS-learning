@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="img/1.jpg" />
+    <img src="img/2.jpg" />
+    <img src="img/3.jpg" />
+    <img src="img/4.jpg" />
+    <img src="img/5.jpg" />
+    <img src="img/6.jpg" />
+    <img src="img/7.jpg" />
+    <img src="img/8.jpg" />
+
+    <script>
+      function fnShake() {
+        let _this = this;
+        shake(_this, "left", function () {
+          shake(_this, "top");
+        });
+      }
+      function shake(obj, attr, endFn) {
+        if (obj.shakeTimer) {
+          return false;
+        }
+        var pos = parseInt(getStyle(obj, attr));
+        var arr = []; //20 -20
+
+        var num = 0;
+        for (var i = 20; i > 0; i -= 2) {
+          arr.push(i, -i);
+        }
+        arr.push(0);
+        //防止跟domove里的timer冲突
+        clearInterval(obj.shakeTimer);
+        obj.shakeTimer = setInterval(function () {
+          obj.style[attr] = pos + arr[num] + "px";
+          num++;
+          if (num === arr.length) {
+            clearInterval(obj.shakeTimer);
+            obj.shakeTimer = false;
+            endFn && endFn();
+          }
+        }, 50);
+      }
+      //获取元素样式函数封装
+      function getStyle(obj, attr) {
+        return obj.currentStyle
+          ? obj.currentStyle[attr]
+          : getComputedStyle(obj)[attr];
+      }
+
+      const imgs = document.getElementsByTagName("img");
+      for (let i = 0; i < imgs.length; i++) {
+        imgs[i].style.left = 80 + i * 110 + "px";
+        imgs[i].onmouseover = function () {
+          shake(imgs[i], "top");
+        };
+      }
+    </script>
+  </body>
+</html>

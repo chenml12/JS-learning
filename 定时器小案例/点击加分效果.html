@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Document</title>
+    <style>
+      @keyframes myfirst {
+        from {
+          background: rgba(255, 0, 0, 1);
+        }
+        to {
+          background: rgba(255, 0, 0, 0);
+        }
+      }
+      body {
+        width: 900px;
+        margin: 0 auto;
+        margin-top: 5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .wrap {
+        width: 500px;
+        height: 50px;
+        line-height: 50px;
+        border: 1px solid #d4d4d4;
+        position: relative;
+        top: 200px;
+      }
+      #bg {
+        width: 0px;
+        height: inherit;
+        background: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #content {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        justify-content: space-around;
+        cursor: pointer;
+      }
+      #content span {
+        display: inline-block;
+        position: relative;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div id="bg"></div>
+      <div id="content">
+        <span>+1</span>
+        <span>+2</span>
+        <span>+3</span>
+        <span>+4</span>
+        <span>+5</span>
+        <span>+6</span>
+        <span>+7</span>
+        <span>+8</span>
+      </div>
+    </div>
+    <script src="domove.js"></script>
+    <script>
+      // 获取
+      var content = document.getElementById("content");
+      var bg = document.getElementById("bg");
+      var spans = content.getElementsByTagName("span");
+      var num = 0;
+      content.onclick = function () {
+        clearInterval(content.timer);
+        content.timer = setInterval(function () {
+          changeOpacity(spans[num], -0.3, 0);
+          doMove(spans[num], "top", 5, -150, function () {
+            const nowTop = parseInt(spans[spans.length - 1].style["top"]);
+            if (nowTop === -150) {
+              reset();
+            }
+          });
+          doMove(bg, "width", 30, 500, function () {
+            changeOpacity(bg, -0.3, 1);
+            // animation: myfirst 1s;
+            bg.style.animation = " myfirst 2s";
+          });
+          num++;
+          if (num == spans.length) {
+            clearInterval(content.timer);
+            num = 0;
+          }
+        }, 100);
+      };
+      //透明度函数封装
+      function changeOpacity(obj, dir, target, fn) {
+        var timer = null;
+        clearInterval(timer);
+        timer = setInterval(function () {
+          var curOpacity = parseInt(getStyle(obj, "opacity")) + dir;
+          if (
+            (curOpacity < target && dir < 0) ||
+            (curOpacity > target && dir > 0)
+          ) {
+            curOpacity = target;
+          }
+          obj.style.opacity = curOpacity;
+          if (curOpacity == target) {
+            clearInterval(timer);
+            fn && fn();
+          }
+        }, 300);
+      }
+      // 初始化
+      function reset() {
+        for (var i = 0; i < spans.length; i++) {
+          spans[i].style.top = "0px";
+          spans[i].style.opacity = "1";
+        }
+        bg.style.opacity = "1";
+        bg.style.width = "0px";
+      }
+    </script>
+  </body>
+</html>
