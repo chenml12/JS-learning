@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // substring()
+      /*
+          var str = "abcdef";
+          console.log(str.substring(1, 2)); //b (包括开始，不包括结束)
+          console.log(str.substring(2, 1)); //b (检测两个数大小，大的往后扔，小的往前扔)
+          console.log(str.substring(1)); //bcdf(第二个参数不填写，会一直到字符串的结尾)
+          console.log(str.substring(-1)); //abcdef (第一个参数为负数当成0来处理)
+          console.log(str.substring(3, -1)); //abc  （会自动检测大小，既 substring（-1,3））
+      */
+
+      // slice
+      /*
+      var str = "abcdef";
+      console.log(str.slice(1, 2)); //b(包括开始，不包括结束)
+      console.log(str.slice(2, 1)); //'' 不检测大小
+      console.log(str.slice(1)); //bcdf(第二个参数不填写，会一直到字符串的结尾)
+      console.log(str.slice(-2)); //ef 提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。
+      console.log(str.slice(-3, -1)); //de 从倒数第三个 到倒数第一个（不包括倒数第一个）
+      */
+
+      //   substr
+      // /*
+      var str = "abcdef";
+      console.log(str.substr(1, 3)); //bc(从下标1开始,往后提取出3个字符)
+      console.log(str.substr(2, 0)); //'' 不能调换位置
+      //参数一如果是负数，那么该参数声明从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。
+      console.log(str.substr(-1)); //f
+      console.log(str.substr(-2)); //ef
+      console.log(str.substr(-3)); //def
+      console.log(str.substr(-1, 1)); //f  从尾部开始计算，抽取一个
+      console.log(str.substr(-1, 2)); //f  从尾部开始计算，抽取一个（第一个参数为负数，只抽取一个）
+      console.log(str.substr(1, -1)); //''第二个参数为负数，返回空字符串
+      // */
+    </script>
+  </body>
+</html>

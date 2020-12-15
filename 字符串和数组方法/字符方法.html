@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 字符串方法
+      /*
+      1.charAt()返回指定位置的字符 
+        var str = "abc";
+        str.charAt(4);
+        console.log(str); //'abc'
+        console.log(str.charAt(0)); //'b'
+        console.log(str.charAt(4)); //''
+         console.log(str.charAt(-3));// ''
+      */
+      /*
+    2.charCodeAt() 返回指定位置的字符的 Unicode 编码 
+      var str = "abz09AZ";
+      str.charCodeAt(0);
+      console.log(str);
+      console.log(str.charCodeAt(0)); //97
+      // 0~9  48~57			a~z	97~122			A~Z   65~90
+      console.log(str.charCodeAt(2)); //122
+      console.log(str.charCodeAt(3)); //48
+      console.log(str.charCodeAt(4)); //57
+      console.log(str.charCodeAt(-4)); //NaN
+      console.log(str.charCodeAt(20)); //NaN
+       */
+      //   3.fromCharCode() 可接受一个指定的 Unicode 值，然后返回一个字符串。
+      console.log(String.fromCharCode(48)); //0
+      console.log(String.fromCharCode(72, 69, 76, 76, 79)); //HELLO
+    </script>
+  </body>
+</html>

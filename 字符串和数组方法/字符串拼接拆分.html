@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 拼接字符串
+      /*
+      var str = "abc";
+      var str1 = "ABC";
+      var str2 = "123";
+      console.log(str.concat(str1, str2)); //abcABC123
+      console.log(str1.concat(str2)); //ABC123
+       */
+      //   拆字符串
+      var str = "www.baidu.com";
+      var str1 = "abc";
+      var str3 = "/www.baidu.com/";
+      console.log(str1.split()); //["abc"]
+      //如果把空字符串 ("") 用作 分隔符，那么 分隔符 中的每个字符之间都会被分割。
+      console.log(str1.split("")); //['a','b','c']
+      console.log(str.split(".")); //["www", "baidu", "com"]
+      console.log(str.split(".", 1)); //["www"] 参数二设置返回的数组的最大长度
+      console.log(str.split("b")); //["www.", "aidu.com"]
+      console.log(str3.split("/")); //['','www.baidu.com','']
+    </script>
+  </body>
+</html>

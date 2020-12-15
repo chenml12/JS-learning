@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  1.match 找字符串
+      // 正则里的i表示 不区分(ignore)大小写；
+      /*
+      var str = "www.baidu.com+a";
+      console.log(str.match(/a/g)); //['a','a']
+
+      // 判断是否微信浏览器:
+      function is_weixn() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      if (is_weixn()) {
+        console.log("是微信浏览器");
+      } else {
+        console.log("不是微信浏览器");
+      }
+      */
+      //  2.search()
+      var str = "www.baidu.com+b";
+      console.log(str.search("b")); //4  首次出现的下标
+      console.log(str.search()); //0
+      console.log(str.search("")); //0
+      console.log(str.search("aaa")); //没有找到任何匹配的子串，则返回 -1。
+
+      // 示例：区分大小写
+      var str = "Mr. Blue has a blue house";
+      console.log(str.search("blue")); //15  区分大小写
+      console.log(str.search(/blue/i)); //4 不区分大小写（ 正则里的i表示 不区分(ignore)大小写；）
+    </script>
+  </body>
+</html>

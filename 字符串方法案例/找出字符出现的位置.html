@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var str = "总目标是时代主题的映射和反映，是时代总任务的凝聚和集成。";
+      var s = "时代";
+      var i = 0;
+      //   for (; str.indexOf(s, i) != -1; ) {
+      //     console.log(str.indexOf(s, i));
+      //     i = str.indexOf(s, i) + s.length;
+      //   }
+      while (str.indexOf(s, i) != -1) {
+        console.log(str.indexOf(s, i)); //4  16
+        i = str.indexOf(s, i) + s.length;
+      }
+    </script>
+  </body>
+</html>
