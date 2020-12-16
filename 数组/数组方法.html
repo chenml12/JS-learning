@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1.Array.push();向末尾添加
+      /*
+               var arr = [1];
+               arr.push(2, 3);
+               console.log(arr); //[1,2,3]  原数组改变
+
+               var arr1 = [1, 2];
+               console.log(arr1.push(2, 3)); //4  返回值：数组的长度
+
+                 */
+      //2.Array.pop();删除数组的最后一个元素
+      /*
+               var arr = ["a", "b", "c"];
+               arr.pop();
+               console.log(arr); //['a','b'] 原数组改变
+               var arr1 = ["aa", "bb", "cc"];
+               console.log(arr.pop()); //'cc' 返回值：被删除的元素（原数组最后一个值。）
+               */
+      //  3.Array.unshift() 向数组的开头添加一个或更多元素
+      /*
+               var arr = [1, 2, 3];
+               arr.unshift(0);
+               console.log(arr); //[0, 1, 2, 3]  原数组改变
+               var arr1 = [11, 22, 33];
+               console.log(arr1.unshift(00, 111)); //5  返回值：新数组的长度
+             */
+      // 4.Array.shift(); 把数组的第一个元素从其中删除
+      /*
+               var arr = [1, 2, 3];
+               arr.shift();
+               console.log(arr); //[2,3]  原数组改变
+               var arr1 = [11, 22, 33];
+               console.log(arr1.shift()); //11 返回被删除的元素（原数组第一个值。）
+               */
+      //  5.Array.concat()  连接两个或更多的数组
+      /*
+               var arr = [1, 2];
+               var arr1 = [3, 4];
+               arr.concat(arr1);
+               console.log(arr); //[1,2]原数组不改变
+               console.log(arr.concat("3")); // [1, 2, '3']  返回值：拼接后的新的数组
+               //如果要进行 concat() 操作的参数是数组，那么添加的是数组中的元素，而不是数组。
+               console.log(arr.concat(arr1)); //[1,2,3,4]
+               */
+      //6.Array.join() 把数组的所有元素放入一个字符串。
+      /*
+               var arr = [1, 2, 3];
+               arr.join();
+               console.log(arr); //[1,2,3] 原数组不变
+               console.log(arr.join()); //'1,2,3'  返回值：一个字符串
+               //元素是通过指定的分隔符进行分隔的。
+               console.log(arr.join("-")); //'1-2-3'
+               */
+      //  7.Array.reverse(); 反转数组的元素顺序(将数组倒序)
+      /*
+               var arr = [1, 2, 3];
+               var arr1 = ["a", "b"];
+               arr.reverse();
+               console.log(arr); //原数组改变
+               console.log(arr1.reverse()); //['b','a'] 返回值：颠倒顺序后的数组
+              */
+      //   8.Array.sort();对数组的元素进行排序。按照字符串UniCode码排序
+      /*
+             var arr = [2, 9, 5, 8];
+             var arr1 = [1, 4, 2, 5];
+             var arr2 = [11, 2, 3, 21];
+             arr.sort();
+             console.log(arr); //原数组改变
+             console.log(arr1.sort()); //[1,2,4,5]  默认为升序
+             console.log(arr2.sort()); //[11,2,21,3]  按照字符串UniCode码排序
+
+             //数字排序（数字和升序）：
+             var arr3 = [2, 4, 11, 5, 23];
+             arr3.sort(function (a, b) {
+               return a - b;
+             });
+             console.log(arr3); //[2,4,5,11,23]
+             //数字排序（降序）：
+             var arr4 = [1, 3, 11, 32, 4];
+             arr4.sort(function (a, b) {
+               return b - a;
+             });
+             console.log(arr4); //[32,11,4,3,1]
+             */
+      // 9.Array.isArray()  判断对象是否为数组。
+      /*
+             var arr = [1, 2];
+             var str = "";
+             console.log(Array.isArray(arr)); //true
+             console.log(arr); //[1,2]  原数组不变
+             console.log(Array.isArray(str)); //false
+            */
+      // 10.toString() 方法可把数组转换为字符串
+      /*
+           var arr = [1, 2];
+           arr.toString();
+           console.log(arr); //[1,2]  原数组不变
+           console.log(arr.toString()); //1,2
+           */
+      // 11.array.valueOf()  返回数组对象的原始值。
+      /*
+           var arr = [1, 2];
+           console.log(arr.valueOf()); //[1,2]
+           */
+      //  12.array.slice()  可从已有的数组中返回选定的元素。
+      /*
+           var arr = [11, 22];
+           arr.slice();
+           console.log(arr); //[11,22]原数组不改变
+           var arr1 = ["a", "b", "c"];
+           // 不填写参数，默认选取整个数组，返回一个新的数组
+           console.log(arr1.slice()); //['a', 'b', 'c']
+           //只填写第一个参数，从指点开始的位置选取到最后
+           console.log(arr1.slice(1)); //[b', 'c'];
+           //从下标1开始选取到下标2（不包括2自己）
+           console.log(arr1.slice(1, 2)); //['b']
+           //如果开始位置是负数（开始位置）,从数组尾部开始算起的位置
+           console.log(arr1.slice(-1)); //['c']
+           console.log(arr1.slice(-2)); //['b','c']截取最后两个元素
+           //第二参数（结束位置）是负数-表示在原数组中的倒数第几个元素结束抽取
+           console.log(arr1.slice(0, -1)); //['a','b']
+           console.log(arr1.slice(-2, -1)); //['b']截取倒数第二个（包含）到倒数第一个（不包含）的一个元素
+       */
+      // 13.array.splice() 用于添加或删除数组中的元素。
+      // /*
+      var arr1 = [11, 22, 33];
+      arr1.splice(1);
+      console.log(arr1); //[11] 原数组改变
+      // ----删除---
+      var arr = [1, 2, 3];
+      console.log(arr.splice()); //[] 不写参数返回空数组
+      var arr2 = [1, 2, 3, 4, 5];
+      console.log(arr.splice(1, 2)); //[2,3] 返回被删除的元素
+      //只写一个参数，删除从 下标 开始到原数组结尾的所有元素。
+      var arr3 = [1, 2, 3, 4, 5, 6];
+      console.log(arr3.splice(1)); //[2, 3, 4, 5, 6]截取小标1开始到最后一个
+      var arr5 = [111, 2, 3];
+      console.log(arr5.splice(-2)); // [2,3] 从倒数第二个开始截取
+      var arr4 = [11, 22, 33];
+      console.log(arr4.splice(1, 0)); //[] 删除0个返回空数组
+      // ---替换---
+      var arr11 = [1, 2, 3];
+      arr11.splice(0, 1, 11);
+      console.log(arr11); //[11, 2, 3]
+      // ---添加---
+      var arr6 = [1, 2, 3];
+      arr6.splice(1, 2, 55); //从下标1开始删除2个（2,3）再添加55
+      console.log(arr6); //[1,55]
+
+      var arr7 = [1, 2];
+      arr7.splice(0, 0, 333);
+      console.log(arr7); //[333,1,2] 向数组首位添加333
+      var arr8 = [1, 2, 3, 4];
+      arr8.splice(-1, 0, "a");
+      console.log(arr8); //[1,2,3,'a',4]
+      var arr9 = [1, 2, 3, 4];
+      arr.splice(arr9.splice(arr9.length, 0, "a"));
+      console.log(arr9); //[1,2,3,4,'a']  向数组末尾添加
+      var arr10 = [1, 2, 3];
+      console.log(arr10.splice(1, 0, 10)); //[] 只要没有删除返回值就是空数组
+      console.log(arr10); //[1, 10, 2, 3]
+      // */
+      //  14.array.indexOf() 返回数组中某个指定的元素位置。
+      /*
+      var arr = [1, 2, 3];
+      arr.indexOf(1);
+      console.log(arr); //[1,2,3]原数组不改变
+      var arr1 = [11, 22, 33];
+      console.log(arr1.indexOf(11)); //0 返回元素在数组中的位置
+      console.log(arr1.indexOf("aa")); //-1 找不到就返回-1
+      */
+    </script>
+  </body>
+</html>

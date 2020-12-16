@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      ul,
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      body {
+        background: #eee;
+      }
+
+      .btns {
+        width: 300px;
+        display: flex;
+        margin: 30px auto;
+      }
+      .btns button {
+        width: 120px;
+        height: 40px;
+        text-align: center;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      ul {
+        width: 1020px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      li {
+        padding: 10px 19px;
+        margin: 1px;
+        background: #fff;
+      }
+      img {
+        width: 300px;
+        height: 198px;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="btns">
+        <button>点击就从大到小</button>
+        <button>点击就随机排序</button>
+      </div>
+      <ul id="list">
+        <!-- <li>
+          <img src="img/1.jpg" />
+          <p>1.这是第一张</p>
+        </li>
+        <li>
+          <img src="img/2.jpg" />
+          <p>2.这是第二张</p>
+        </li>
+        <li>
+          <img src="img/3.jpg" />
+          <p>3.这是第三张</p>
+        </li>
+        <li>
+          <img src="img/4.jpg" />
+          <p>4.这是第四张</p>
+        </li>
+        <li>
+          <img src="img/5.jpg" />
+          <p>5.这是第五张</p>
+        </li>
+        <li>
+          <img src="img/6.jpg" />
+          <p>6.这是第六张</p>
+        </li> -->
+      </ul>
+    </div>
+
+    <script>
+      const secondArr = ["一", "二", "三", "四", "五", "六"];
+      const list = document.getElementById("list");
+
+      //渲染
+      // init(firstArr);
+      const btns = document.querySelectorAll(".btns button");
+      let onOff = false; //排序开关
+      secDom(secondArr);
+      btns[0].onclick = function () {
+        this.innerHTML = onOff ? "点击就从大到小" : "点击就从小到大";
+        onOff = !onOff;
+        secDom(secondArr.reverse());
+      };
+      btns[1].onclick = function () {
+        const dataArr = secondArr.map((item, index) => ({
+          title: item,
+          id: onOff ? secondArr.length - index : index + 1,
+        }));
+        dataArr.sort(() => Math.random() - 0.5);
+        secDom(dataArr, true);
+      };
+      //初始化-渲染
+      function secDom(arr, value) {
+        list.innerHTML = "";
+        let str = "";
+        function num(index) {
+          return onOff ? arr.length - index : index + 1;
+        }
+        arr.forEach((item, index) => {
+          str += `<li><img src='img/${
+            value ? item.id : num(index)
+          }.jpg'/><p>这是第${value ? item.title : item}张</p></li>`;
+        });
+        list.innerHTML = str;
+      }
+    </script>
+  </body>
+</html>

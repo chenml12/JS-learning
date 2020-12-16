@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      ul,
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      body {
+        background: #eee;
+      }
+
+      .btns {
+        width: 300px;
+        display: flex;
+        margin: 30px auto;
+      }
+      .btns button {
+        width: 120px;
+        height: 40px;
+        text-align: center;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      ul {
+        width: 1020px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      li {
+        padding: 10px 19px;
+        margin: 1px;
+        background: #fff;
+      }
+      img {
+        width: 300px;
+        height: 198px;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="btns">
+        <button>点击就从大到小</button>
+        <button>点击就随机排序</button>
+      </div>
+      <ul id="list">
+        <!-- <li>
+          <img src="img/1.jpg" />
+          <p>1.这是第一张</p>
+        </li>
+        <li>
+          <img src="img/2.jpg" />
+          <p>2.这是第二张</p>
+        </li>
+        <li>
+          <img src="img/3.jpg" />
+          <p>3.这是第三张</p>
+        </li>
+        <li>
+          <img src="img/4.jpg" />
+          <p>4.这是第四张</p>
+        </li>
+        <li>
+          <img src="img/5.jpg" />
+          <p>5.这是第五张</p>
+        </li>
+        <li>
+          <img src="img/6.jpg" />
+          <p>6.这是第六张</p>
+        </li> -->
+      </ul>
+    </div>
+
+    <script>
+      var firstArr = [
+        {
+          title: "这是第一张图片",
+          img: "img/1.jpg",
+          id: 1,
+        },
+        {
+          title: "这是第二张图片",
+          img: "img/2.jpg",
+          id: 2,
+        },
+        {
+          title: "这是第三张图片",
+          img: "img/3.jpg",
+          id: 3,
+        },
+        {
+          title: "这是第四张图片",
+          img: "img/4.jpg",
+          id: 4,
+        },
+        {
+          title: "这是第五张图片",
+          img: "img/5.jpg",
+          id: 5,
+        },
+        {
+          title: "这是第六张图片",
+          img: "img/6.jpg",
+          id: 6,
+        },
+      ];
+      const list = document.getElementById("list");
+
+      //渲染
+      init(firstArr);
+      const btns = document.querySelectorAll(".btns button");
+      let onOff = false; //排序开关
+      btns[0].onclick = function () {
+        firstArr.reverse();
+        this.innerHTML = onOff ? "点击就从大到小" : "点击就从小到大";
+        init(firstArr);
+        onOff = !onOff;
+      };
+      btns[1].onclick = function () {
+        const copyArr = firstArr.map((item) => {
+          return item;
+        });
+        copyArr.sort(function (a, b) {
+          return Math.random() - 0.5;
+        });
+        init(copyArr);
+      };
+      //初始化-渲染
+      function init(arr) {
+        list.innerHTML = "";
+        arr.forEach((item, index) => {
+          list.innerHTML += `
+        <li>
+          <img src='${item.img}'/>
+          <p>${item.id}-${item.title}</p>
+        </li>
+        `;
+        });
+      }
+    </script>
+  </body>
+</html>

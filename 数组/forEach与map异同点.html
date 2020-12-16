@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      //相同点
+      const arr = ["a", "b", "c"];
+      //2.都支持这个3个参数
+      arr.forEach(function (item, index, array) {
+        //1.循环遍历数组中的每一项
+        console.log(item); //打印3次分别为'a'  'b'    'c'
+        console.log(this); //window  3.匿名函数中的this都是指向window
+      });
+      arr.map(function (item, index, array) {
+        //循环遍历数组中的每一项
+        console.log(item); //打印3次分别为'a'  'b'    'c'
+        console.log(this); //window
+      });
+      //  4.只能遍历数组，其他数据类型报错
+      console.log(arr); //["a", "b", "c"]  5.不会改变原数组
+      */
+
+      //   var array = [10, 34, 57, 43, 76];
+      //   var res = array.forEach(function (item, index, input) {
+      //     input[index] = item * 10;
+      //   });
+      //   console.log(res); //--> undefined;
+      //   console.log(array); //--> 通过数组索引改变了原数组；
+
+      var arr = [0, 2, 4, 6, 8];
+      var str = arr.map(function (item, index, arr) {
+        return item / 2;
+      }, this);
+      console.log(str); //[0,1,2,3,4]
+      console.log(arr); //[0,2,4,6,8]
+    </script>
+  </body>
+</html>

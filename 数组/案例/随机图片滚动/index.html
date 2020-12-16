@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>随机图片滚动</title>
+    <style type="text/css">
+      body,
+      ol,
+      li,
+      ul,
+      div,
+      span,
+      a,
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      ul,
+      ol,
+      li {
+        list-style: none;
+      }
+      img {
+        outline: none;
+        vertical-align: top;
+      }
+      .Main_area {
+        width: 590px;
+        height: auto;
+        margin: 80px auto;
+        border: #000 solid 1px;
+      }
+      .Main_area ul:after {
+        content: ".";
+        display: block;
+        visibility: hidden;
+        height: 0;
+        clear: both;
+      }
+      .Main_area ul li {
+        width: 275px;
+        height: 160px;
+        float: left;
+        margin: 10px 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      .Main_area ul li div {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      .Main_area ul li div:last-child {
+        top: 160px;
+      }
+      .Main_area ul li div a {
+        display: block;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="Main_area">
+      <ul id="PicUl">
+        <!--<li>
+          <div><a href="javascript:void(0);"><img src="img/11.jpg" alt=""  /></a></div>
+          <div><a href="javascript:void(0);"><img src="img/12.jpg" alt=""  /></a></div>
+       </li>
+       <li>
+          <div><a href="javascript:void(0);"><img src="img/21.jpg" alt=""  /></a></div>
+          <div><a href="javascript:void(0);"><img src="img/22.jpg" alt=""  /></a></div>
+       </li>
+       <li>
+          <div><a href="javascript:void(0);"><img src="img/31.jpg" alt=""  /></a></div>
+          <div><a href="javascript:void(0);"><img src="img/32.jpg" alt=""  /></a></div>
+       </li>
+       <li>
+          <div><a href="javascript:void(0);"><img src="img/41.jpg" alt=""  /></a></div>
+       </li>
+       <li>
+          <div><a href="javascript:void(0);"><img src="img/51.jpg" alt=""  /></a></div>
+       </li>
+       <li>
+          <div><a href="javascript:void(0);"><img src="img/61.jpg" alt=""  /></a></div>
+       </li>
+       <li>
+          <div><a href="javascript:void(0);"><img src="img/71.jpg" alt=""  /></a></div>
+       </li>
+       <li>
+          <div><a href="javascript:void(0);"><img src="img/81.jpg" alt=""  /></a></div>
+       </li>-->
+      </ul>
+    </div>
+  </body>
+</html>

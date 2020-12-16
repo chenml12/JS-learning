@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      ul,
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      body {
+        background: #eee;
+      }
+
+      .btns {
+        width: 300px;
+        display: flex;
+        margin: 30px auto;
+      }
+      .btns button {
+        width: 120px;
+        height: 40px;
+        text-align: center;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      ul {
+        width: 1020px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      li {
+        padding: 10px 19px;
+        margin: 1px;
+        background: #fff;
+      }
+      img {
+        width: 300px;
+        height: 198px;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="btns">
+        <button>点击就从大到小</button>
+        <button>点击就随机排序</button>
+      </div>
+      <ul id="list">
+        <li>
+          <img src="img/1.jpg" />
+          <p>1.这是第一张</p>
+        </li>
+        <li>
+          <img src="img/2.jpg" />
+          <p>2.这是第二张</p>
+        </li>
+        <li>
+          <img src="img/3.jpg" />
+          <p>3.这是第三张</p>
+        </li>
+        <li>
+          <img src="img/4.jpg" />
+          <p>4.这是第四张</p>
+        </li>
+        <li>
+          <img src="img/5.jpg" />
+          <p>5.这是第五张</p>
+        </li>
+        <li>
+          <img src="img/6.jpg" />
+          <p>6.这是第六张</p>
+        </li>
+      </ul>
+    </div>
+    <script>
+      //点击按钮排序
+      const btns = document.querySelectorAll(".btns button");
+      const list = document.getElementById("list");
+      const lis = list.querySelectorAll("li");
+      var initArr = [];
+      var onOff = false; //控制排序的按钮的切换
+      init();
+      btns[0].onclick = function () {
+        if (onOff) {
+          //从小到大 正序
+          this.innerHTML = "点击就从大到小";
+          list.innerHTML = init().join("");
+        } else {
+          //从大到小
+          this.innerHTML = "点击就从小到大";
+          //数组倒叙
+          list.innerHTML = orderArr(initArr).reverse().join("");
+        }
+        onOff = !onOff;
+      };
+      //随机
+      btns[1].onclick = function () {
+        var disorderList = orderArr(initArr);
+        disorderList.sort(function (a, b) {
+          return Math.random() - 0.5;
+        });
+        list.innerHTML = disorderList.join("");
+      };
+
+      //初始化 将页面上的元素，存到数组
+      function init() {
+        initArr = [];
+        for (var i = 0; i < lis.length; i++) {
+          initArr.push("<li>" + lis[i].innerHTML + "</li>");
+        }
+        return initArr;
+      }
+      // 正序（克隆一个）
+      function orderArr(initArr) {
+        var newArr = [];
+        for (var i = 0; i < initArr.length; i++) {
+          newArr.push(initArr[i]);
+        }
+        return newArr;
+      }
+    </script>
+  </body>
+</html>
