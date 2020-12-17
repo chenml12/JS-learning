@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #list {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="list">
+      <li>11</li>
+      <li>222</li>
+      <li>333</li>
+    </ul>
+    <script>
+      //   var list = document.getElementById("list"); //通过document提供的对象获取
+      //   //   var lis = list.children;
+      //   //   console.log(lis.length); //3  (只有元素节点)
+      //   var lis = list.childNodes;
+      //   console.log(lis.length); //7(包括了空格-文本节点)
+
+      var list = document.getElementById("list");
+      var lis = list.children;
+    </script>
+  </body>
+</html>

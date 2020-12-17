@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box" aa="11"></div>
+    <script>
+      var box = document.getElementById("box");
+      box.index = 1;
+      console.log(box.index); //1   不是行间的getAttribute是获取不到的
+      console.log(box.getAttribute("id")); //box 获取行间  属性名为id  的属性值
+      box.setAttribute("class", "div"); //给box设置 属性名为class ,属性值为div
+      box.removeAttribute("aa"); //删除行间的aa属性
+    </script>
+  </body>
+</html>
