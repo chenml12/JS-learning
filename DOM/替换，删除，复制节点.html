@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">按钮</button>
+    <div id="div">
+      <span>span</span>
+    </div>
+    <script>
+      var btn = document.getElementById("btn");
+      var div = document.getElementById("div");
+      var span = document.querySelector("span");
+      var b = document.createElement("b");
+      btn.onclick = function () {
+        //替换节点
+        // div.replaceChild(b, span); //将span替换成b
+        /*
+        删除节点:
+        	父级.removeChild(指定的子节点)
+
+        注意：
+        	如果指定的子节点没有，那么会报错。（进行判断解决）
+          */
+        // div.removeChild(b);
+        // 复制节点
+        /*
+          元素.cloneNode(); //克隆某个元素
+
+          注意：
+            在克隆的时候，默认（false）只克隆指定元素本身，不会克隆该元素下的所有子节点。
+           （cloneNode(有参数，默认为false)），如果里面传入true，那么就可以克隆该元素下的所有子节点。
+            事件是不会被克隆的。
+              */
+      };
+
+      var cloneSpan = span.cloneNode(); //不会克隆子节点
+      var cloneSpan2 = span.cloneNode(true); //会克隆子节点
+      div.appendChild(cloneSpan2);
+    </script>
+  </body>
+</html>

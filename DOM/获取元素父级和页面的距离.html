@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      body {
+        height: 3000px;
+      }
       body,
       div {
         margin: 0;
@@ -28,6 +31,9 @@
         background: blue;
         position: absolute;
         left: 100px;
+        border: 4px solid #ddd;
+        padding: 5px;
+        margin: 5px;
       }
     </style>
   </head>
@@ -39,8 +45,15 @@
     </div>
     <script>
       var div3 = document.getElementById("div3");
-      console.log(div3.offsetLeft); //100   div3距离定位父级的距离
-      console.log(div3.getBoundingClientRect().left); //150   div3距离页面左边的距离
+      //元素外边框到有定位父级的内边框的距离。
+      // left + margin
+      console.log(div3.offsetLeft); //105   div3距离定位父级的距离
+      // 元素外边框到页面左边的距离
+      // div1的margin50+left+margin
+      console.log(div3.getBoundingClientRect().left); //155   div3距离页面左边的距离
+      console.log(div3.offsetTop); //5  margin=5  div3到定位父级的上边距离（一直不会变）
+      //获取的值是会根据滚动条变化的。
+      console.log(div3.getBoundingClientRect().top); //有滚动条就一直在变
     </script>
   </body>
 </html>

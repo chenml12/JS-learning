@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .li1 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">点击添加</button>
+    <ul id="list"></ul>
+    <div id="div">000000000000</div>
+    <script>
+      /*
+      创建/插入节点
+      const list = document.getElementById("list");
+      const btn = document.getElementById("btn");
+      let num = 0;
+      btn.onclick = function () {
+        num++;
+        const li = document.createElement("li"); //创建元素
+        const attr = document.createAttribute("class"); //创建属性节点
+        const txt = document.createTextNode("你好"); //创建文本节点
+        attr.value = "li1";
+        li.setAttributeNode(attr); //添加新的属性节点
+
+        li.appendChild(txt);
+        // list.appendChild(li); //	插入元素：（向父级末尾添加一个元素）
+        // 特性：如果第二个参数为假的，那么会将某个元素添加到父元素的末位。
+        // 向父级中的某个元素前插入元素
+        list.insertBefore(li, list.children[0]);
+      };
+      */
+      //替换节点
+
+      const btn = document.getElementById("btn");
+      const div = document.getElementById("div");
+      var textNode = document.createTextNode("111");
+      btn.onclick = function () {
+        div.replaceChild(textNode, div.children[0]);
+      };
+    </script>
+  </body>
+</html>
