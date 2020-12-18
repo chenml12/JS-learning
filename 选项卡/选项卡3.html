@@ -101,20 +101,36 @@
        */
       //    方法二：记录上一个值
 
+      // let prev = "";
+      // for (let i = 0; i < btns.length; i++) {
+      //   btns[i].index = i;
+      //   btns[i].onclick = function () {
+      //     //循环找出默认值，记录为上一个值
+      //     for (let j = 0; j < btns.length; j++) {
+      //       if (btns[j].classList.contains("active")) {
+      //         prev = btns[j];
+      //       }
+      //     }
+      //     prev.className = "";
+      //     divs[prev.index].className = "";
+      //     this.className = "active";
+      //     divs[this.index].className = "active";
+      //   };
+      // }
+
       let prev = "";
       for (let i = 0; i < btns.length; i++) {
         btns[i].index = i;
         btns[i].onclick = function () {
-          //循环找出默认值，记录为上一个值
-          for (let j = 0; j < btns.length; j++) {
-            if (btns[j].classList.contains("active")) {
-              prev = btns[j];
-            }
+          btns[0].className = "";
+          divs[0].className = "";
+          if (prev) {
+            prev.className = "";
+            divs[prev.index].className = "";
           }
-          prev.className = "";
-          divs[prev.index].className = "";
           this.className = "active";
           divs[this.index].className = "active";
+          prev = this;
         };
       }
     </script>
