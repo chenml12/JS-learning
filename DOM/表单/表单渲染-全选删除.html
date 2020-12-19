@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style type="text/css">
+      #tab {
+        border: 5px solid #333;
+      }
+      #tab th,
+      #tab td {
+        width: 200px;
+        text-align: center;
+        border: 1px solid #333;
+      }
+      #tab thead {
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="tab">
+      <thead>
+        <th>商品全选<input id="checkAll" type="checkbox" /></th>
+        <th>商品编号</th>
+        <th>商品名称</th>
+        <th>商品价格</th>
+        <th>商品数量</th>
+        <th>商品删除<a href="javascript:;">批量删除</a></th>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script type="text/javascript">
+      var aData = [
+        {
+          checked: false,
+          num: 1,
+          name: "雪碧",
+          price: 2.2,
+          count: 50,
+        },
+        {
+          checked: false,
+          num: 2,
+          name: "可口可乐",
+          price: 2.3,
+          count: 55,
+        },
+
+        {
+          checked: false,
+          num: 3,
+          name: "百事可乐",
+          price: 2.3,
+          count: 56,
+        },
+
+        {
+          checked: false,
+          num: 4,
+          name: "美年达",
+          price: 2.1,
+          count: 45,
+        },
+
+        {
+          checked: false,
+          num: 5,
+          name: "醒目",
+          price: 2.0,
+          count: 35,
+        },
+
+        {
+          checked: false,
+          num: 6,
+          name: "健力宝",
+          price: 2.6,
+          count: 40,
+        },
+
+        {
+          checked: false,
+          num: 7,
+          name: "七喜",
+          price: 2.2,
+          count: 42,
+        },
+
+        {
+          checked: false,
+          num: 8,
+          name: "王老吉",
+          price: 3.2,
+          count: 30,
+        },
+
+        {
+          checked: false,
+          num: 9,
+          name: "加多宝",
+          price: 3.3,
+          count: 45,
+        },
+
+        {
+          checked: true,
+          num: 10,
+          name: "芬达",
+          price: 2.3,
+          count: 48,
+        },
+      ];
+
+      const tab = document.getElementById("tab");
+      const tBody = tab.tBodies[0];
+      const newArr = Array.from(tab.tHead.rows[0].cells);
+      const checkAll = document.getElementById("checkAll");
+      // console.log(Array.isArray(newArr));
+
+      function delFn(value) {
+        console.log(value, 1);
+      }
+      tabFn(aData);
+
+      function tabFn(data) {
+        // console.log(data);
+        tBody.innerHTML = "";
+        data.forEach((item, i) => {
+          let tr = document.createElement("tr");
+          //隔行变色
+          tr.style.background = i % 2 ? "yellowgreen" : "#ccc";
+          //生成单选
+          let td1 = document.createElement("td");
+          td1.innerHTML = `<input ${
+            item.checked && "checked"
+          } type="checkbox" />`;
+          tr.appendChild(td1);
+          //循环数据
+          for (let attr in item) {
+            if (attr !== "checked") {
+              let td2 = document.createElement("td");
+              td2.innerHTML = item[attr];
+
+              tr.appendChild(td2);
+            }
+          }
+          //生成删除
+          let td3 = document.createElement("td");
+          td3.innerHTML = '<a href="javascript:;" >删除</a>';
+          tr.appendChild(td3);
+          tBody.appendChild(tr);
+        });
+        //点击删除按钮
+        var delBtn = tBody.querySelectorAll("a");
+        // console.log(delBtn);
+        for (let i = 0; i < delBtn.length; i++) {
+          delBtn[i].index = i;
+          delBtn[i].onclick = function () {
+            const fiArr = data.filter((val, n) => {
+              if (this.index !== n) {
+                return val;
+              }
+            });
+            tabFn(fiArr);
+          };
+        }
+        // 单选
+        const checkeds = tBody.getElementsByTagName("input");
+        for (let i = 0; i < checkeds.length; i++) {
+          checkeds[i].onclick = function () {
+            data[i].checked = this.checked;
+            let isChecked = data.every((item) => {
+              if (item.checked) {
+                return true;
+              }
+            });
+            checkAll.checked = isChecked;
+            tabFn(data);
+          };
+        }
+      }
+      // 全选;
+
+      checkAll.onclick = function () {
+        aData.forEach((item, index) => {
+          item.checked = this.checked;
+        });
+        tabFn(aData);
+      };
+    </script>
+  </body>
+</html>
