@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="txt" value="11111   +1111" />
+
+    <script>
+      const txt = document.getElementById("txt");
+      txt.onfocus = function () {
+        console.log("获取焦点事件");
+      };
+      txt.onblur = function () {
+        console.log("失去焦点事件");
+      };
+      txt.focus(); //给指定的元素设置焦点事件
+      txt.blur(); //取消指定元素的焦点
+      txt.select(); //选择指定元素里面的文本内容
+    </script>
+  </body>
+</html>

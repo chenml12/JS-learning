@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #div1 {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+      }
+      #div2 {
+        width: 80px;
+        margin: 0 auto;
+        height: 200px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body style="height: 2000px">
+    <div id="div1">
+      <div id="div2"></div>
+    </div>
+    <script>
+      //可视区的尺寸
+      console.log(document.documentElement.clientHeight);
+      //滚动条滚动距离
+      console.log(document.documentElement.scrollTop);
+      //内容高
+      console.log(document.getElementById("div2").scrollHeight); //200
+      //文档的高度
+      console.log(document.body.offsetHeight);
+      console.log(document.documentElement.offsetHeight);
+    </script>
+  </body>
+</html>

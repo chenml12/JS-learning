@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body style="height: 2000px">
+    <div id="box"></div>
+    <script>
+      //clientY是相对可视区的距离，如果有滚动条的时候需要加上滚动条的距离
+      const box = document.getElementById("box");
+      document.onmousemove = function (ev) {
+        console.log(111);
+        ev = ev || event;
+        let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        box.style.left = ev.clientX + "px";
+        box.style.top = ev.clientY + scrollTop + "px";
+      };
+    </script>
+  </body>
+</html>

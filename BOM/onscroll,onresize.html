@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="height: 2000px">
+    <script>
+      let i = 0;
+      window.onscroll = function () {
+        document.title = i++;
+      };
+      window.onresize = function () {
+        console.log(document.documentElement.clientWidth);
+      };
+    </script>
+  </body>
+</html>

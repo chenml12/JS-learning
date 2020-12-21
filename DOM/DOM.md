@@ -120,9 +120,10 @@ var list = document.getElementById("list"); //通过document提供的对象获�
        padding: 5px;
     margin: 5px;
    }
+   ````
 ````
    
-````javascript
+​````javascript
    var div3 = document.getElementById("div3");
 //元素外边框到有定位父级的内边框的距离。
    // left + margin
@@ -133,16 +134,16 @@ var list = document.getElementById("list"); //通过document提供的对象获�
    console.log(div3.offsetTop); //5  margin=5  div3到定位父级的上边距离（一直不会变）
    //获取的值是会根据滚动条变化的。
    console.log(div3.getBoundingClientRect().top); //有滚动条就一直在变
-   ````
+````
 
    **不同点**
 
    offset获取元素外边框到定位父级的距离
 
    getBoundingClientRect 获取到页面顶部的距离（**获取的值是会根据滚动条变化**）
-   
-   ****
-   
+
+****
+
    #### 获取宽高
 
 ​	**功能：获取某个元素的宽高**
@@ -206,6 +207,7 @@ console.log(box.clientWidth); //120
 ````
 
 ````javascript
+//不带px
 var div = document.getElementById("div");
 var clientW = document.documentElement.clientWidth;//可视区宽
 var clientH = document.documentElement.clientHeight;//可视区高
@@ -214,6 +216,20 @@ var iH = div.offsetHeight;//元素高
 div.style.left = (clientW - iW) / 2 + "px";
 div.style.top = (clientH - iH) / 2 + "px";
 ````
+
+**滚动条滚动距离**
+
+` document.documentElement.scrollTop/scrollLeft`
+
+**内容高度**
+
+`document.body.scrollHeight`
+
+**文档高度**
+
+`document.documentElement.offsetHeight`（标准）
+
+`document.body.offsetHeight`（IE+标准） --建议使用
 
 #### 属性操作
 

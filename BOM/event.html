@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // event：事件对象
+      //   当一个事件发生的时候，和当前这个对象发生的这个事件有关的一些详细的信息都会临时保存到一个指定的地方--event对象，供我们在需要的时候调用
+
+      //   兼容性
+      /*
+       ie/chrome : event是一个内置全局对象
+       标准下 : 事件对象是通过事件函数的第一个参数传入
+       
+      
+      */
+      console.log(event); //ie:null  chrome:undefined    这里没有事件
+      document.onclick = function (ev) {
+        //兼容标准浏览器和ie
+        ev = ev || event;
+        console.log(ev);
+      };
+    </script>
+  </body>
+</html>
