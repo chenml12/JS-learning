@@ -1,4 +1,4 @@
-## DOM（文档对象模型）
+DOM（文档对象模型）
 
 通过document提供的一些方法或者属性来操作页面
 
@@ -121,10 +121,8 @@ var list = document.getElementById("list"); //通过document提供的对象获�
     margin: 5px;
    }
    ````
-````
-   
-​````javascript
-   var div3 = document.getElementById("div3");
+````javascript
+var div3 = document.getElementById("div3");
 //元素外边框到有定位父级的内边框的距离。
    // left + margin
    console.log(div3.offsetLeft); //105   div3距离定位父级的距离
@@ -230,6 +228,12 @@ div.style.top = (clientH - iH) / 2 + "px";
 `document.documentElement.offsetHeight`（标准）
 
 `document.body.offsetHeight`（IE+标准） --建议使用
+
+
+
+ offsetWidth  clientWidth innerWidth区别 ：
+
+https://www.cnblogs.com/feijiediyimei/p/11363126.html
 
 #### 属性操作
 

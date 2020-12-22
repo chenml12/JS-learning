@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        元素.addEventListener(事件名，函数，布尔值)
+
+​        事件监听器绑定事件
+
+​        参数：
+
+​          事件名：string,不带on,
+
+​          函数:事件函数，有名或匿名
+
+​          布尔值：默认是false
+
+​            true:捕获阶段调用函数
+
+​            false:冒泡阶段调用函数
+        */
+      //   ie:
+      document.attachEvent("onclick", function () {
+        console.log(1);
+      });
+      //同一元素的同一事件可以绑定多个不同的函数
+
+      //   document.addEventListener("click", function () {
+      //     console.log(1);
+      //   });
+      //   document.addEventListener("click", function () {
+      //     console.log(2);
+      //   });
+      //   //同一元素的同一事件绑定同一函数，只留一个
+      //   document.addEventListener("click", fn);
+      //   document.addEventListener("click", fn);
+      //   function fn() {
+      //     console.log(1);
+      //   }
+    </script>
+  </body>
+</html>

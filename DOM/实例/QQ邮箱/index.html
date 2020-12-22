@@ -74,6 +74,7 @@
   </body>
 
   <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
   <script>
     //   生成列表
     const emailListUl = document.querySelector(".emailListUl");
@@ -96,6 +97,8 @@
     // 找到所有的单选按钮
     const checkboxSingle = emailListUl.querySelectorAll("input");
     const checkedLen = checkboxSingle.length;
+
+    console.log(checkedLen);
     checkboxAll.onclick = function () {
       for (let i = 0; i < checkedLen; i++) {
         checkboxSingle[i].checked = this.checked;
@@ -127,9 +130,16 @@
           this.parentNode.style.background = "#f2f6f9";
         }
       };
+      checkboxSingle[j].onmousedown = function (ev) {
+        // 阻止冒泡
+        ev.stopPropagation();
+      };
     }
     //　用来获选中的input
     function whoSelected() {
+      const checkboxSingle = emailListUl.querySelectorAll("input");
+      const checkedLen = checkboxSingle.length;
+
       let arr = [];
       for (let i = 0; i < checkedLen; i++) {
         if (checkboxSingle[i].checked) {
@@ -141,7 +151,11 @@
     //删除按钮
     const delet = document.getElementById("delet");
     delet.onclick = function () {
-      var selectArr = whoSelected();
+      delectHtml();
+    };
+
+    function delectHtml() {
+      let selectArr = whoSelected();
       for (let j = 0; j < selectArr.length; j++) {
         //删结构
         selectArr[j].parentNode.remove();
@@ -152,8 +166,53 @@
             list.splice(k, 1);
           }
         }
-        console.log(list);
+        //判断数据是否全部删除了，如果删除了，让全选里的checked=false
+        if (JSON.stringify(list) === "[]") {
+          checkboxAll.checked = false;
+        }
       }
-    };
+    }
+    // 在某一个li上mousedown的会后，让提示出现
+    const tip = document.getElementById("hint3");
+    // 拿到所有的li
+    var lis = emailListUl.querySelectorAll("li");
+    // 碰撞元素;
+    var beenDel = document.querySelector(".beenDel");
+
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].onmousedown = function (ev) {
+        //是否选中
+        let input = this.querySelector("input");
+        if (!input.checked) {
+          return;
+        }
+        let selectArr = whoSelected();
+        let isCollision = false; // 默认没碰上
+        tip.style.display = "block";
+        tip.style.top = ev.clientY + 1 + "px";
+        tip.style.left = ev.clientX + 1 + "px";
+        tip.innerHTML = `选中${selectArr.length}封邮件`;
+        document.onmousemove = function (ev) {
+          tip.style.top = ev.clientY + "px";
+          tip.style.left = ev.clientX + "px";
+
+          // 碰撞检测
+          if (collision(tip, beenDel)) {
+            isCollision = true;
+          }
+
+          //取消默认行为
+          ev.preventDefault();
+        };
+        document.onmouseup = function () {
+          tip.style.display = "none";
+          // 是否碰上
+          if (isCollision) {
+            delectHtml();
+          }
+          document.onmousemove = document.onmousemup = null;
+        };
+      };
+    }
   </script>
 </html>
