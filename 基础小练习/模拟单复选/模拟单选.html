@@ -3,7 +3,7 @@
   <head lang="en">
     <meta charset="UTF-8" />
     <title></title>
-    <link rel="stylesheet" href="./radio.css">
+    <link rel="stylesheet" href="./radio.css" />
   </head>
   <body>
     <div class="box">
@@ -21,9 +21,9 @@
           没有：再找到对应点击的那个按钮 给它单独加上 class checked
       
       */
-      const btns=document.querySelectorAll('.option a');
+      const btns = document.querySelectorAll(".option a");
 
-// 方法一：
+      // 方法一：
       // //  for 添加点击事件
       // for(let i=0; i<btns.length; i++){
       //   btns[i].onclick=function(){
@@ -40,7 +40,7 @@
       //     }
       //   }
       // }
-// 方法二
+      // 方法二
       // for(let i=0; i<btns.length; i++){
       //   btns[i].onclick= function(){
       //     console.log(i)
@@ -49,11 +49,11 @@
       //         btns[j].classList.remove('checked');
       //       }
       //     }
-      //     this.classList.toggle('checked'); 
+      //     this.classList.toggle('checked');
       //    }
 
       // }
-// 方法三：
+      // 方法三：
       // for(var i=0; i<btns.length; i++){
       //   const h=i;
       //   btns[i].onclick= function(){
@@ -62,24 +62,21 @@
       //         btns[j].classList.remove('checked');
       //       }
       //     }
-      //     this.classList.toggle('checked'); 
+      //     this.classList.toggle('checked');
       //    }
 
       // }
 
       // 方法四 ：判断当前点击的是不是上一次点击的，进行判断（记录上一次）
-      let ht='';
-      for(let i=0; i<btns.length; i++){
-        btns[i].onclick=function(){
-          
-          if(ht && ht!==this ){
-            ht.classList.remove('checked'); 
+      let prev = null;
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].onclick = function () {
+          if (prev) {
+            prev.className = "";
           }
-          ht=this;
-          // ht && ht!==this && ht.classList.remove('checked');
-          // ht=this;
-          this.classList.toggle('checked');
-        }
+          this.className = "checked";
+          prev = this;
+        };
       }
     </script>
   </body>

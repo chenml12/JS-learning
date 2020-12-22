@@ -118,19 +118,15 @@
       //   };
       // }
 
-      let prev = "";
+      let prev = 0;
       for (let i = 0; i < btns.length; i++) {
         btns[i].index = i;
         btns[i].onclick = function () {
-          btns[0].className = "";
-          divs[0].className = "";
-          if (prev) {
-            prev.className = "";
-            divs[prev.index].className = "";
-          }
+          btns[prev].className = "";
+          divs[prev].className = "";
           this.className = "active";
           divs[this.index].className = "active";
-          prev = this;
+          prev = this.index;
         };
       }
     </script>

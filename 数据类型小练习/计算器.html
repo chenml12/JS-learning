@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <input type="text" />
+    +
+    <input type="text" />
+    =
+    <input type="text" />
+    <input type="button" value="按钮" />
+    <script>
+      const inps = document.querySelectorAll("input");
+      inps[3].onclick = function () {
+        console.log(11);
+        const val1 = inps[0].value;
+        const val2 = inps[1].value;
+        inps[2].value = Number(val1) + Number(val2);
+      };
+    </script>
+  </body>
+</html>

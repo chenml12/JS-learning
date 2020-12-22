@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var str = "";
+      var arr = ["red", "yellow", "blue", "green"];
+      for (let i = 0; i < 25; i++) {
+        str += `<div style=width:50px;height:50px;position:absolute;background:${
+          arr[0]
+        };left:${(i % 5) * 60}px;top:${Math.floor(i / 5) * 60}px;"></div>`;
+      }
+      document.body.innerHTML = str;
+      let n = 0; //控制颜色变化
+      const divs = document.querySelectorAll("div");
+      for (let i = 0; i < divs.length; i++) {
+        divs[i].onOff = false;
+        divs[i].onmouseover = function () {
+          let m = 0; //控制onOff变true的个数
+          for (let j = 0; j < divs.length; j++) {
+            if (divs[j].onOff) {
+              m++;
+            }
+          }
+          if (m == 0) {
+            for (let j = 0; j < divs.length; j++) {
+              divs[j].onOff = true;
+            }
+            n++;
+          }
+          if (this.onOff) {
+            this.onOff = false;
+            this.style.background = arr[n % arr.length];
+          }
+        };
+      }
+    </script>
+  </body>
+</html>
