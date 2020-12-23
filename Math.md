@@ -1,0 +1,65 @@
+## Math对象
+
+Math
+
+​          数学对象，下面有很多关于数字的方法
+
+​        Math.PI 
+
+​          圆周率，3.1415926
+
+​        Math.abs()
+
+​          绝对值，正数负数都是正
+
+​        Math.cos()
+
+​        Math.sin()
+
+​        Math.tan()
+
+​        
+
+​        Math.ceil()
+
+​          向上取整
+
+​        Math.floor()
+
+​          向下取整
+
+​          
+
+​        Math.max()
+
+​          最大值
+
+​        Math.min()
+
+​          最小值
+
+​        Math.pow(a,b)
+
+​          a的b次方
+
+​        Math.sqrt(a,b)
+
+​          a开b次方
+
+​        Math.random()
+
+​          [0,1) 0-1之间随机小数
+
+​        Math.round()
+
+​          四舍五入
+
+​        一些常用的随机整数公式
+
+​          0 ~ x : Math.round(Math.random()*x)
+
+​          0 ~ x-1 : Math.floor(Math.random()*x)
+
+​          1 ~ x : Math.ceil(Math.random()*x) || 1
+
+​          x ~ y : Math.round(Math.random()*(y-x) + x)
