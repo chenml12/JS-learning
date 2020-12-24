@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+         递归
+            函数自己调用自己
+        注意:
+            别写成死循环
+            
+            1.有条件的调用自己
+            2.有终止条件
+            
+            //  规则相同，重复做同一件事时使用
+            */
+      var n = 0;
+      function fn() {
+        n++;
+        if (n == 3) {
+          return n;
+        }
+        // console.log(n);
+        return fn() + n;
+      }
+      //   fn();
+      console.log(fn()); //1+1+2+2+3=9
+
+      // 执行
+      /*
+     fn()+1  
+        fn()+2 
+          3    
+            
+     */
+      /*
+      返回：
+      1+1
+        2+2
+          3
+    */
+    </script>
+  </body>
+</html>
