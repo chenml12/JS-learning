@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <input type="button" value="设置" />
+    <input type="button" value="获取" />
+    <script>
+      /*
+      location
+      	地址栏信息对象
+      	可以获取也可以设置
+      	href：地址
+      	search:查询信息
+      	hash:锚信息
+      	除了设置hash，设置其他的都会刷新页面，注意不要设置在全局，不然会无限刷新页面
+      	设置href同a标签的跳转
+      * */
+      /*
+      search
+      	查询信息
+      	?这段信息#
+      	问号后井号前的信息
+
+      	会刷新页面，不要放在全局
+      	?属性=值&属性=值
+
+      * */
+      /*
+		hash
+			锚信息
+			#后边的
+			不刷新页面
+			#属性=值/属性=值
+			
+		window.onhashchange
+			hash改变时触发的事件
+		* */
+      //   console.log(location);
+      const btns = document.querySelectorAll("input");
+      //设置
+      btns[0].onclick = function () {
+        location.hash = "abc";
+        location.search = "nnn";
+      };
+      //获取
+      btns[1].onclick = function () {
+        console.log(location.search); //?nnn
+        console.log(location.hash); //#abc
+      };
+      window.onhashchange = function () {
+        console.log("改变");
+      };
+    </script>
+  </body>
+</html>

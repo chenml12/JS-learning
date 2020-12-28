@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="history2.html">百度</a>
+    <input type="button" value="前进" id="btn" />
+    <script>
+      /*
+       navigator
+				 	浏览器信息对象
+				 	navigator.userAgent
+				 	浏览器信息
+      */
+      // console.log(navigator.userAgent);
+      console.log(window.screen.availWidth);
+      const btns = document.querySelector("#btn");
+
+      console.log(history.length);
+      btn.onclick = function () {
+        history.forward();
+      };
+    </script>
+  </body>
+</html>
