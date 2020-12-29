@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>招贤纳士-社会招聘</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/data.js"></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="left">
+        <h2>招贤纳士</h2>
+        <ul>
+          <!-- <li class="focus"><a href="javascript:;">社会招聘</a></li>
+      	<li><a href="javascript:;">校园招聘</a></li> -->
+        </ul>
+      </div>
+      <div class="right">
+        <div class="title">
+          <!-- <img src="img/shzp.gif" /> -->
+        </div>
+        <div class="info">
+          <!-- <p class="zp">
+        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+          <span>需求人数：2名</span>
+         	<span class="date">2013年7月30日</span>
+        </p>
+      	<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+        </p>
+
+      	<p class="zp">
+        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+          <span>需求人数：12名</span>
+         	<span class="date">2013年7月30日</span>
+         	<span class="date">2013年7月30日</span>
+        </p>
+      	<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+        </p>
+
+      	<p class="zp">
+        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+          <span>需求人数：21名</span>
+         	<span class="date">2013年7月30日</span>
+        </p>
+      	<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+       </p> -->
+        </div>
+        <div class="pages">
+          <span class="prev">
+            <a href="javascript:;">
+              <img src="img/pre.gif" />
+            </a>
+          </span>
+          <span class="next">
+            <a href="javascript:;">
+              <img src="img/next.gif" />
+            </a>
+          </span>
+          <p>
+            <!--  <span class="focus">
+            <a href="javascript:;">1</a>
+          </span>
+          <span>
+            <a href="javascript:;">2</a>
+          </span>
+          <span>
+            <a href="javascript:;">3</a>
+          </span> -->
+          </p>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <script>
+      /*
+         	1.拿数据，渲染页面
+         		a.第一次，设置默认
+         		b.有search,hash，根据给的值渲染
+         	2.左侧切换
+         	3.页码切换
+         	4.跳转详情页
+         *
+         * */
+
+      //1.拿数据，渲染页面
+      //拿数据
+      const search = location.search;
+      const hash = location.hash;
+      let t = search ? search.split("=")[1] : aData.list[0].lx;
+      let h = hash ? hash.split("=")[1] : 1;
+      //拿到数据
+      let data = aData[t];
+      const title = document.querySelector(".title");
+      const ulLeft = document.querySelectorAll("ul")[0];
+      const info = document.querySelector(".info");
+      const pageBox = document.querySelector(".pages p");
+      //title切换
+      title.innerHTML = `<img src="img/${t == "sh" ? "shzp" : "xyzp"}.gif" />`;
+      //2.左侧切换
+      let leftStr = "";
+      aData.list.forEach((item) => {
+        leftStr += `<li><a href="list.html?t=${item.lx}">${item.text}</a></li>`;
+      });
+      ulLeft.innerHTML = leftStr;
+      //左侧高亮效果
+      const leftLis = document.querySelectorAll(".left li");
+      for (let i = 0; i < leftLis.length; i++) {
+        if (aData.list[i].lx == t) {
+          leftLis[i].className = "focus";
+        }
+      }
+      //生成页码
+      const len = 2; //页码显示2个
+      //   计算有几页
+      const pageLen = Math.ceil(data.text.length / len);
+      let str2 = ""; //存放页码
+      for (let i = 0; i < pageLen; i++) {
+        str2 += `<span><a href="javascript:;">${i + 1}</a></span>`;
+      }
+      pageBox.innerHTML = str2;
+      const spans = pageBox.querySelectorAll("span");
+      //第一次第一页高亮
+      spans[h - 1].className = "focus";
+      //页码点击
+      for (let i = 0; i < spans.length; i++) {
+        spans[i].onclick = function () {
+          location.hash = "p=" + Number(this.innerText);
+        };
+      }
+      //内容渲染
+      create();
+      function create() {
+        let str3 = "";
+        let start = (h - 1) * len;
+        let end = start + len;
+        if (end > data.text.length - 1) {
+          end = data.text.length;
+        }
+
+        for (let i = start; i < end; i++) {
+          str3 += `
+		  <p class="zp">
+        	<span><a href="content.html?t=${t + "#n=" + i}">★ 职位需求：${
+            data.text[i].zw
+          }</a></span>
+          <span>需求人数：${data.text[i].rs}名</span>
+         	<span class="date">${data.text[i].sj}</span>
+         
+        </p>
+      	<p class="yq">${data.text[i].info[0].l
+          .join("")
+          .substring(0, 100)}...[<a href="">查看详情</a>]
+        </p>`;
+        }
+        info.innerHTML = str3;
+      }
+
+      //分页
+      window.onhashchange = function () {
+        //获取hash页码，高亮，渲染页面
+        h = location.hash.split("=")[1];
+        for (let i = 0; i < spans.length; i++) {
+          spans[i].className = "";
+        }
+        spans[h - 1].className = "focus";
+
+        create();
+      };
+      //上一页，下一页
+      const prev = document.querySelector(".prev");
+      const next = document.querySelector(".next");
+      prev.onclick = function () {
+        let num = Number(h);
+        num--;
+        if (num < 1) {
+          num = 1;
+        }
+
+        location.hash = "p=" + num;
+      };
+      next.onclick = function () {
+        let num = Number(h);
+        num++;
+        if (num > pageLen) {
+          num = pageLen;
+        }
+
+        location.hash = "p=" + num;
+      };
+    </script>
+  </body>
+</html>
