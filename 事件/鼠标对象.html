@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #box {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: relative;
+        top: 200px;
+      }
+    </style>
+  </head>
+  <body style="height: 2000px">
+    <div id="box"></div>
+    <script>
+      /*
+			 	鼠标事件对象
+			 		功能键
+			 			true:按着，false:没按
+			 		altKey
+			 		shiftKey
+			 		ctrlKey
+			 		
+			 		鼠标事件触发时，鼠标距离可视区左边和上边的距离
+			 		clientX
+			 		clientY
+			 		
+			 		鼠标事件触发时，鼠标距离文档内容左边和上边的距离，clientY+滚动距离 = pageY,ie低版本不兼容，需要获取clientY+滚动距离
+			 		pageX
+			 		pageY
+			 		
+			 		鼠标事件触发时，鼠标距离浏览器窗口左边和上边的距离
+			 		screenX
+			 		screenY
+			 		
+			 		鼠标事件触发时，鼠标距离该元素左边和上边的距离，低版本不兼容，clientX-元素到可视区距离 = 鼠标到元素距离
+			 		offsetX
+			 		offsetY
+			 		
+			 		which - 键值
+			 			chrome下click只有左键触发
+			 			firefox下click都触发
+			 			mousedown,3个键都触发
+			 			1左键，2中键，3右键
+			 * */
+      //   const box = document.getElementById("box");
+      //   document.onclick = function (ev) {
+      //     console.log(ev);
+      //     // console.log(ev.altKey); //按住alt键点击返回 true
+      //     console.log(ev.clientY); //距离可视区的距离
+      //     console.log(ev.pageY); //距离文档的距离
+      //     console.log(ev.screenY); //距离屏幕的距离
+      //     console.log(ev.offsetY); //相对于事件源元素的距离
+      //   };
+      document.onmousedown = function () {
+        //3个键都触发
+        //   1左键，2中键，3右键
+        console.log(111);
+      };
+    </script>
+  </body>
+</html>

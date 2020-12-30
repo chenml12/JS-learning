@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 300px;
+        height: 300px;
+        background: red;
+      }
+      #div2 {
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      #div3 {
+        width: 100px;
+        height: 100px;
+        background: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div id="div1">
+      <div id="div2">
+        <div id="div3"></div>
+      </div>
+    </div> -->
+    <ul id="list">
+      <li><span>1</span></li>
+      <li><span>2</span></li>
+      <li><span>3</span></li>
+      <li><span>4</span></li>
+    </ul>
+    <script>
+      /*
+      var div1 = document.getElementById("div1");
+      var div2 = document.getElementById("div2");
+      var div3 = document.getElementById("div3");
+
+      document.onclick = function (ev) {
+        //事件源
+        console.log(ev.target.id);
+      };
+    */
+
+      // const lis = document.querySelectorAll("li");
+      // for (var i = 0; i < lis.length; i++) {
+      //   lis[i].onclick = function () {
+      //     this.style.background = "red";
+      //   };
+      // }
+      // 事件委托写法
+      const list = document.getElementById("list");
+      list.onclick = function (ev) {
+        console.log(ev.target.nodeName);
+        ev.target.style.background = "red";
+      };
+    </script>
+  </body>
+</html>
