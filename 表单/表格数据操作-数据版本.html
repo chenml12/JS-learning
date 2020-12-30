@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      td {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form action="" name="form">
+      <p>姓名:<input type="text" name="username" /></p>
+      <p>年龄:<input type="text" name="age" /></p>
+      <p>
+        性别:
+        <select name="sex">
+          <option value="男">男</option>
+          <option value="女">女</option>
+        </select>
+      </p>
+      <p>
+        <input type="button" value="添加" name="add" />
+      </p>
+    </form>
+    <input type="button" value="反选" class="btn" />
+    <input type="button" value="批量删除" class="btn" />
+    <table id="tab" width="100%" border="1">
+      <thead>
+        <tr>
+          <th><input id="checkAll" type="checkbox" /> 全选</th>
+          <th>ID</th>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>性别</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!--<tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>1</td>
+                <td>周杰伦</td>
+                <td>37</td>
+                <td>男</td>
+                <td>
+                    <a href="javascript:;">上移</a> |
+                    <a href="javascript:;">下移</a> |
+                    <a href="javascript:;">删除</a>
+                </td>
+            </tr> -->
+      </tbody>
+    </table>
+    <script type="text/javascript">
+      var Data = [
+        {
+          id: 1,
+          name: "宋小宝",
+          age: 36,
+          sex: "男",
+        },
+        {
+          id: 2,
+          name: "郭德纲",
+          age: 12,
+          sex: "男",
+        },
+        {
+          id: 3,
+          name: "黄渤",
+          age: 28,
+          sex: "男",
+        },
+        {
+          id: 4,
+          name: "赵丽颖",
+          age: 25,
+          sex: "女",
+        },
+        {
+          id: 5,
+          name: "刘亦菲",
+          age: 22,
+          sex: "女",
+        },
+      ];
+      /*
+        1.渲染页面
+        2.上移下移删除
+        3.全选
+        4.反选
+        5.批量删除
+        6.添加数据
+        7.排序
+        * */
+      //渲染页面
+
+      const tab = document.getElementById("tab");
+      const tBody = tab.tBodies[0];
+      const checkAll = document.getElementById("checkAll");
+      const btns = document.querySelectorAll(".btn");
+      //给每个数据加一个checked属性
+      Data.forEach((item) => {
+        item.checked = false;
+      });
+      creatDom(Data);
+      function creatDom(data) {
+        tBody.innerHTML = "";
+        data.forEach((item) => {
+          createTr(item);
+        });
+
+        const trs = tBody.querySelectorAll("tr");
+        for (let i = 0; i < trs.length; i++) {
+          const a1 = trs[i].querySelectorAll("td a");
+
+          //筛选出当前这条数据
+          const arr = Data.filter((item, index) => {
+            if (index === i) {
+              return item;
+            }
+          });
+          //单个判断全选
+          const inp = trs[i].getElementsByTagName("input")[0];
+          inp.onclick = function () {
+            Data[i].checked = !Data[i].checked;
+            checkA();
+          };
+
+          //上移
+          a1[0].onclick = function () {
+            if (i - 1 >= 0) {
+              Data.splice(i, 1);
+              Data.splice(i - 1, 0, ...arr);
+              creatDom(Data);
+            }
+          };
+          //下移
+          a1[1].onclick = function () {
+            if (i + 1 < Data.length) {
+              Data.splice(i, 1);
+              Data.splice(i + 1, 0, ...arr);
+              creatDom(Data);
+            }
+          };
+          // 删除
+          a1[2].onclick = function () {
+            Data.splice(i, 1);
+            creatDom(Data);
+          };
+        }
+      }
+      //生成页面函数
+      function createTr(data) {
+        //创建行
+        const tr = tBody.insertRow();
+        tr.setAttribute("id", data.id);
+        // 创建一个td内容为checkbox
+        tr.insertCell().innerHTML = `<input ${
+          data.checked && "checked"
+        } type="checkbox"/>`;
+
+        const checks = document.querySelectorAll("td input");
+
+        //根据数据生成td
+        for (let k in data) {
+          if (k != "checked") {
+            tr.insertCell().innerHTML = data[k];
+          }
+        }
+        //生成放上移下移删除的td
+        const td = tr.insertCell();
+        td.innerHTML = ` <a href="javascript:;">上移</a> |
+                    <a href="javascript:;">下移</a> |
+                    <a href="javascript:;">删除</a>`;
+      }
+      //判断是否全选
+      function checkA() {
+        let isChecked = Data.every((cur) => {
+          if (cur.checked) {
+            return true;
+          }
+        });
+        checkAll.checked = isChecked;
+      }
+      //全选
+      checkAll.onclick = function () {
+        Data.forEach((item) => {
+          item.checked = this.checked;
+        });
+        creatDom(Data);
+      };
+      //反选
+      btns[0].onclick = function () {
+        Data.forEach((item) => {
+          item.checked = !item.checked;
+        });
+        checkA();
+        creatDom(Data);
+      };
+      // 批量删除
+      btns[1].onclick = function () {
+        let newData = Data.filter((item) => {
+          if (!item.checked) {
+            return item;
+          }
+        });
+        creatDom(newData);
+      };
+
+      //查找最大id
+      function maxId() {
+        let max = -Infinity;
+        Data.forEach((item) => {
+          if (max < item.id) {
+            max = item.id;
+          }
+        });
+        return max;
+      }
+      //添加数据
+      let idNum = maxId();
+      const From = document.querySelector("form");
+      From.add.onclick = function () {
+        let j = {
+          id: ++idNum,
+          name: From.username.value,
+          age: From.age.value,
+          sex: From.sex.value,
+        };
+        Data.push(j);
+
+        creatDom(Data);
+      };
+      //排序
+      // 根据id
+
+      const idSort = tab.tHead.rows[0].cells[1];
+      idSort.onOff = true;
+      idSort.onclick = function () {
+        Data.sort(function (a, b) {
+          if (idSort.onOff) {
+            //倒序
+            return b.id - a.id;
+          } else {
+            //正序
+            return a.id - b.id;
+          }
+        });
+        this.onOff = !this.onOff;
+        creatDom(Data);
+      };
+
+      const ageSort = tab.tHead.rows[0].cells[3];
+      ageSort.onOff = true;
+      ageSort.onclick = function () {
+        Data.sort(function (a, b) {
+          if (ageSort.onOff) {
+            //正序
+            return a.age - b.age;
+          } else {
+            //倒序
+            return b.age - a.age;
+          }
+        });
+        this.onOff = !this.onOff;
+        creatDom(Data);
+      };
+    </script>
+  </body>
+</html>
