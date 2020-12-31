@@ -1,2 +1,45 @@
 ## JSON
 
+一种数据交换的格式
+
+ JavaScript Object Notation
+
+长得像对象的字符串
+
+长得像对象的字符串
+
+两种格式：'{}','[]'
+
+ 属性名，字符串必须用双引号
+
+ 简单4种，不支持undefined
+
+ 复杂2种，{},[]
+
+JSON.stringify()
+
+​	 js对象转成JSON格式的字符串
+
+  JSON.parse()
+
+  	JSON格式的字符串转成js对象
+
+````javascript
+var Json = `{
+"name" : "小明",
+"age" : 18,
+"marry":false,
+"like":["篮球","跳绳"],
+"gf":null
+}`;
+
+var j = {
+name:'小红',
+age:20
+};
+var Json2 = JSON.parse(Json)
+var j2 = JSON.stringify(j)
+//console.log(Json2.name)
+console.log(typeof j2)
+````
+
