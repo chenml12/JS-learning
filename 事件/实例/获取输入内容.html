@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="" id="txt" />
+  </body>
+  <script>
+    /*
+    keydown和keypress触发时间在文本改变之前
+    解决办法：
+        1.用keyup
+    * 	2.延时定时器
+    * */
+    const txt = document.getElementById("txt");
+    //方法一
+    // txt.onkeydown = function () {
+    //   let _this = this;
+    //   //   console.log(this.value);//点第一下会是一个空
+    //   setTimeout(function () {
+    //     console.log(_this.value);
+    //   }, 10);
+    // };
+
+    //方法二
+    txt.onkeyup = function () {
+      console.log(this.value);
+    };
+  </script>
+</html>

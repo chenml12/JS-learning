@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      div {
+        position: absolute;
+        border: 1px solid red;
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1"></div>
+  </body>
+  <script>
+    const div1 = document.getElementById("div1");
+    document.onmousedown = function (ev) {
+      let oL = ev.clientX;
+      let oT = ev.clientY;
+      div1.style.display = "block";
+      document.onmousemove = function (ev) {
+        let iL = ev.clientX;
+        let iT = ev.clientY;
+        let w = Math.abs(iL - oL);
+        let h = Math.abs(iT - oT);
+        let l = iL > oL ? oL : iL;
+        let t = iT > oT ? oT : iT;
+        div1.style.top = t + "px";
+        div1.style.left = l + "px";
+        div1.style.width = w + "px";
+        div1.style.height = h + "px";
+      };
+      document.onmouseup = function () {
+        div1.style.cssText = "";
+      };
+    };
+  </script>
+</html>
