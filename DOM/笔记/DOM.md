@@ -157,6 +157,8 @@ var div3 = document.getElementById("div3");
 3. clientWidth/clientHeight
 
    语法：元素.clientWidth/ 元素.clientHeight
+   
+   
 
 ````css
 #box {
@@ -228,6 +230,14 @@ div.style.top = (clientH - iH) / 2 + "px";
 `document.documentElement.offsetHeight`（标准）
 
 `document.body.offsetHeight`（IE+标准） --建议使用
+
+**可视区宽高**
+
+innerWidth/innerHeight
+
+​	移动端：innerWidth 
+
+​	PC:document.documentElement.clientWidth
 
 
 
