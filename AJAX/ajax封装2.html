@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function ajax(json) {
+        //默认配置
+        var settings = {
+          url: "",
+          method: "get",
+          success: function () {},
+          fail: function () {},
+          data: {},
+          dataType: "json", //返回的数据格式，默认为json
+        };
+        //有配置走配置，没配置走默认
+        for (var attr in json) {
+          settings[attr] = json[attr];
+        }
+
+        //将一个对象转成字符串  user=momo&sex=男&id=2
+        var arr = [];
+        for (var i in settings.data) {
+          arr.push(i + "=" + settings.data[i]);
+        }
+
+        settings.data = arr.join("&");
+
+        var ajax = new XMLHttpRequest();
+
+        //如果请求方式是get，在open下的第二个参数就要拼接字段
+        //else就是post。要设置请求头信息并且把字段拼接到send中
+        if (settings.method.toLowerCase() === "get") {
+          ajax.open(settings.method, settings.url + "?" + settings.data, true);
+          ajax.send();
+        } else {
+          ajax.open(settings.method, settings.url, true);
+          ajax.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+          );
+          ajax.send(settings.data);
+        }
+
+        ajax.onload = function () {
+          //当请求成功的时候执行settings.success，失败的时候执行settings.fail
+          if (ajax.status >= 200 && ajax.status <= 207) {
+            //如果传入json，那么就返回对象格式的数据
+            if (settings.dataType === "json") {
+              settings.success(eval("(" + ajax.responseText + ")"));
+            } else if (settings.dataType === "xml") {
+              //如果传入的是xml，那么返回xml格式的数据
+              settings.success(ajax.responseXML);
+            } else {
+              //如果传入的既不是json也不是xml，那么返回json格式（字符串）的数据
+              settings.success(ajax.responseText);
+            }
+          } else {
+            settings.fail(ajax.status);
+          }
+        };
+      }
+      function ajax(obj) {
+        var settings = {
+          url: "",
+          data: {},
+          dataType: "json",
+          success: function () {},
+          error: function () {},
+          method: "get",
+        };
+
+        for (var attr in obj) {
+          settings[attr] = obj[attr];
+        }
+
+        //xx=xxx&xxx=xxxx
+        var arr = [];
+        for (var i in settings.data) {
+          arr.push(i + "=" + settings.data[i]); //['user=leo','pass=1234']
+        }
+
+        settings.data = arr.join("&"); //user=leo&pass=1234
+
+        var ajax = new XMLHttpRequest();
+
+        if (settings.method.toLowerCase() === "get") {
+          ajax.open("get", settings.url + "?" + settings.data);
+          ajax.send();
+        } else {
+          ajax.open("post", settings.url);
+          ajax.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+          );
+          ajax.send(settings.data);
+        }
+
+        ajax.onreadystatechange = function () {
+          if (ajax.readyState === 4) {
+            if (ajax.status >= 200 && ajax.status <= 207) {
+              if (settings.dataType === "json") {
+                //settings.success(eval('('+ajax.responseText+')'));
+                settings.success(
+                  new Function("", "return" + ajax.responseText)()
+                );
+              } else if (settings.dataType === "xml") {
+                settings.success(ajax.responseXML);
+              } else {
+                settings.success(ajax.responseText);
+              }
+            } else {
+              settings.error({
+                status: ajax.status,
+                readyState: ajax.readyState,
+              });
+            }
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

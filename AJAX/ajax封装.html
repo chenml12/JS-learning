@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function myajax(method, ajHtml, ajText, fn) {
+        //创建一个新的对象用于存储ajax
+        let xhr = null;
+        //判断浏览器中有没有XMLHttpRequest对象，如果没有，就调用ie的对象赋值
+        if (window.XMLHttpRequest) {
+          xhr = new XMLHttpRequest();
+        } else {
+          xhr = new ActiveXObject("Msxm12.XMLHTTP");
+        }
+        //判断是get还是post传递方式，并调用对应的方法
+        if (method == "get") {
+          xhr.open("get", ajHtml, true);
+          xhr.send();
+        } else if (method == "post") {
+          xhr.open("post", ajHtml, true);
+          xhr.setRequestHeader(
+            "content-type",
+            "application/x-www-form-urlencoded"
+          );
+          let date = ajText || "";
+          xhr.send(date);
+        }
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              //设置一个方法给外部参数调用
+              fn(xhr.responseText);
+            }
+          }
+        };
+      }
+
+      function getData(value) {
+        console.log(value);
+      }
+
+      myajax("get", "/grt/news", true, getData);
+    </script>
+  </body>
+</html>
