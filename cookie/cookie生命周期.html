@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        生命周期：
+      	  默认的生命周期为本次浏览器关闭之前
+          不同的浏览器不共享cookie
+          */
+      // 设置cookie的生命周期使用expires这个名，单位是天，现在出一个新的名叫max-age单位是秒。
+      // 为 cookie 添加一个过期时间
+      //   过期时间为一天
+      var odate = new Date();
+      odate.setDate(odate.getDate() + 1);
+      document.cookie = "name=momo;expires=" + odate;
+    </script>
+  </body>
+</html>

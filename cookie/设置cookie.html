@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //设置cookie
+      // JavaScript 可以使用 document.cookie 属性来创建 、读取、及删除 cookie。
+
+      // 设置：
+      // 	document.cookie = xx
+
+      // 	document.cookie ='key=value'
+      //旧cookie不会被覆盖，如果名字一样就会被覆盖
+      document.cookie = 0;
+      document.cookie = 1;
+      document.cookie = "user=chenchen";
+      document.cookie = "user=aa";
+      document.cookie = "age=18";
+
+      // document.cookie 将以字符串的方式返回所有的 cookie，类型格式： cookie1=value; cookie2=value; cookie3=value;
+      console.log(document.cookie); //age=18; 1; user=aa
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //设置cookie
+      //   function setCookie(key, value, time) {
+      //     var odate = new Date();
+      //     odate.setDate(odate.getDate() + time);
+      //     document.cookie = key + "=" + value + ";expires=" + (time ? odate : "");
+      //   }
+
+      //   setCookie("name", "       momo", 1);
+      //获取cookie
+      function getCookie(key) {
+        let arr = document.cookie.split(";");
+        for (let i = 0; i < arr.length; i++) {
+          let arr2 = arr[i].split("=");
+          if (arr2[0] === key) {
+            return arr2[1];
+          }
+        }
+
+        return null;
+      }
+
+      console.log(getCookie("name"));
+    </script>
+  </body>
+</html>
