@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    用户名:<input type="text" name="" id="user" value="" /> 密码:<input
+      type="password"
+      name=""
+      id="pass"
+      value=""
+    />
+    <input type="button" id="btn" value="登录" />
+    <input type="button" id="btn2" value="注册" />
+    <input type="button" id="btn3" value="注消" style="display: none" />
+    <h1 id="h1"></h1>
+    <script type="text/javascript">
+      const user = document.getElementById("user");
+      const pass = document.getElementById("pass");
+      const btn = document.getElementById("btn");
+      const btn2 = document.getElementById("btn2");
+      const btn3 = document.getElementById("btn3");
+      const h1 = document.getElementById("h1");
+
+      /*
+      	 	sql:[{username:"小明",pass:123456},{username:"小明",pass:123456}]
+
+      	 	key:'小明';登录成功
+      	 */
+
+      /*
+      	 	1.刷新页面，通过key来找xxx来到miaov（隐藏登录框）
+
+      	 	2.如果key值中没有那么就显示登录框
+
+      	 	3.点击按钮的时候，获取user，pass，去数据库中取值，去匹配有没有输入正确
+
+      	 	先看看数据中有没有这个名字，没有alert(注册)
+
+      		 	 如果设置正确：
+      		 	  	设置key值 -> 刷新页面
+
+      		 	 不正确：
+      		 	 	alert(用户名密码输入有误)
+      	 */
+      setCookie("sql", '[{"小明":123456},{"小凤":654321}]', 1);
+      const onOff = true;
+      btn.onclick = function () {
+        const uVal = user.value;
+        const pVal = pass.value;
+        const json = JSON.parse(getCookie("sql")); //把json变成数组
+
+        for (let i = 0; i < json.length; i++) {
+          for (let attr in json[i]) {
+            if (attr == uVal) {
+              //说明有这个人
+              if (json[i][attr] == pVal) {
+                //验证数据库的密码与填写的密码匹配否
+                setCookie("key", uVal, 1); //如果匹配就设置key
+                window.location.reload();
+
+                onOff = false;
+                return;
+              } else {
+                alert("用户名密码错误!");
+                onOff = false;
+              }
+            }
+          }
+        }
+        //如果既不是用户密码错误，也没有正确匹配到，说明没有这个人要注册。
+        if (onOff) {
+          alert("请注册!");
+        }
+      };
+      //注册
+      const onOff2 = true;
+      btn2.onclick = function () {
+        const uVal = user.value;
+        const pVal = pass.value;
+        const json = JSON.parse(getCookie("sql"));
+        for (let i = 0; i < json.length; i++) {
+          for (let attr in json[i]) {
+            if (attr == uVal) {
+              console.log("用户已经存在");
+              onOff2 = false;
+            }
+          }
+        }
+        if (onOff2) {
+          json.push({ [uVal]: pVal });
+          setCookie("sql", JSON.stringify(json));
+          this.style.display = "none";
+        }
+      };
+      btn3.onclick = function () {
+        removeCookie("key", getCookie("key"));
+        window.location.reload();
+      };
+
+      //   //找key有没有被设置，如果没有，就要让他登录，有就xxx欢迎来到
+      if (getCookie("key") == -1) {
+        btn.value = "登录";
+        user.style.display = "block";
+        pass.style.display = "block";
+        btn3.style.display = "none";
+        btn.disabled = false;
+      } else {
+        h1.innerHTML = getCookie("key") + "欢迎欢迎！~~";
+        user.style.display = "none";
+        pass.style.display = "none";
+        btn2.style.display = "none";
+        btn3.style.display = "inline-block";
+        btn.disabled = true;
+      }
+
+      //设置cookie
+      function setCookie(key, value, time) {
+        const d = new Date();
+        d.setDate(d.getDate() + time);
+        document.cookie = key + "=" + value + ";expires=" + (time ? d : "");
+      }
+      //获取cookie
+      function getCookie(key) {
+        const arr = document.cookie.split("; ");
+        for (let i = 0; i < arr.length; i++) {
+          const arr2 = arr[i].split("=");
+          if (arr2[0] === key) {
+            return arr2[1];
+          }
+        }
+        return -1;
+      }
+
+      //删除cookie
+      function removeCookie(key, value) {
+        setCookie(key, value, -1);
+      }
+    </script>
+  </body>
+</html>
