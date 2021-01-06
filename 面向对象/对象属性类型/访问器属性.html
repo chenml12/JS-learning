@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        var Person = {
+          name: "xm",
+          age: 20,
+        };
+        console.log(Person.age);
+       */
+      //定义单个属性特性
+
+      //定义单个属性特性:
+      /*
+      let book = {
+        _year: 2021,
+        edition: 1,
+      };//这里添加属性，默认可操作
+      Object.defineProperty(book, "year", {
+           //在读取属性时调用的函数
+        get: function () {
+          return this._year;
+        },
+        set: function (newVal) {
+     // 在写入属性时调用的函数
+          if (newVal > 2021) {
+            this._year = newVal;
+            this.edition += newVal - 2021;
+          }
+        },
+      });
+      book.year = 2022;
+      console.log(book.edition); //2
+        */
+      //  定义多个属性:defineProperties
+      //   区别：这里的属性都是在同一时间创建的
+
+      var book = {};
+      Object.defineProperties(book, {
+        //在这里写，默认不可以操作，例如writable默认为false
+        _year: {
+          writable: true,
+          value: 10,
+        },
+        edition: {
+          value: 1,
+        },
+        year: {
+          get: function () {
+            return this._year;
+          },
+          set: function (newVal) {
+            if (newVal > 10) {
+              this._year = newVal;
+              this.edition += newVal - 1;
+            }
+          },
+        },
+      });
+      book.year = 100;
+      //   writable: true====100     writable: false====10
+      console.log(book.year); //100
+      console.log(book.edition); //1
+    </script>
+  </body>
+</html>

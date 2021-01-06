@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var book = {};
+      Object.defineProperties(book, {
+        _year: {
+          writable: true,
+          value: 10,
+        },
+        edition: {
+          value: 1,
+        },
+        year: {
+          get: function () {
+            return this._year;
+          },
+          set: function (newVal) {
+            if (newVal > 10) {
+              this._year = newVal;
+              this.edition += newVal - 1;
+            }
+          },
+        },
+      });
+      //   const descriptor = Object.getOwnPropertyDescriptor(book, "_year");
+      //   console.log(descriptor.value); //10
+      //   console.log(descriptor.writable); //true
+      //   console.log(descriptor.configurable); //false
+      //   console.log(descriptor.edition); //undefined
+      const descriptor = Object.getOwnPropertyDescriptor(book, "year");
+      console.log(descriptor.value); //undefined
+      console.log(descriptor.writable); //undefined
+      console.log(descriptor.configurable); //false
+      console.log(descriptor.edition); //undefined
+      console.log(typeof descriptor.get); //function
+    </script>
+  </body>
+</html>

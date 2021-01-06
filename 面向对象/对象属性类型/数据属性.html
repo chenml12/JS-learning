@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var Person = {
+        name: "小明",
+      };
+      //   相当于
+      var Person = new Object();
+      Object.defineProperty(Person, "name", {
+        configurable: true, //是否可以delete
+        enumerable: true, //是否可以枚举
+        writable: true, //是否可以修改
+        value: "小明", //属性值
+      });
+      console.log(Person); //{name:'小明'}
+    </script>
+  </body>
+</html>
