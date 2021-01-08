@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        top: 10px;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      //面向过程
+      /*
+      const box = document.getElementById("box");
+      box.onmousedown = function (ev) {
+        const disX = ev.clientX - this.offsetLeft;
+        const disY = ev.clientY - this.offsetTop;
+        document.onmousemove = function (ev) {
+          const l = ev.clientX - disX + "px";
+          const t = ev.clientY - disY + "px";
+          box.style.left = l;
+          box.style.top = t;
+        };
+        document.onmouseup = function () {
+          document.onmousemove = document.onmouseup = null;
+        };
+      };
+      */
+      function Drag(id) {
+        this.box = document.getElementById(id);
+        this.disX = 0;
+        this.disY = 0;
+        const _this = this;
+        this.box.onmousedown = function (ev) {
+          _this.down(ev);
+        };
+      }
+      Drag.prototype.down = function (ev) {
+        this.disX = ev.clientX - this.box.offsetLeft;
+        this.disY = ev.clientY - this.box.offsetTop;
+        const _this = this;
+        document.onmousemove = function (ev) {
+          _this.move(ev);
+        };
+        document.onmouseup = function (ev) {
+          _this.up();
+        };
+      };
+      Drag.prototype.move = function (ev) {
+        this.box.style.left = ev.clientX - this.disX + "px";
+        this.box.style.top = ev.clientY - this.disY + "px";
+      };
+      Drag.prototype.up = function () {
+        document.onmousemove = document.onmouseup = null;
+      };
+      new Drag("box");
+    </script>
+  </body>
+</html>

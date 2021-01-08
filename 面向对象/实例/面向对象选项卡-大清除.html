@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .active {
+        background: yellow;
+      }
+      #box div {
+        width: 150px;
+        height: 150px;
+        border: 1px solid #000;
+        display: none;
+      }
+      #box div.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <input type="button" name="" id="" value="按钮一" class="active" />
+      <input type="button" name="" id="" value="按钮二" />
+      <input type="button" name="" id="" value="按钮三" />
+      <div class="show">1111</div>
+      <div>22222</div>
+      <div>33333</div>
+    </div>
+    <script type="text/javascript">
+      //面向过程
+      /*
+            const box = document.getElementById("box");
+            const btns = box.querySelectorAll("input");
+            const divs = box.querySelectorAll("div");
+            for (let i = 0; i < btns.length; i++) {
+              btns[i].index = i;
+              btns[i].onclick = function () {
+                for (let k = 0; k < btns.length; k++) {
+                  divs[k].className = "";
+                  btns[k].className = "";
+                }
+                this.className = "active";
+                divs[this.index].className = "show";
+              };
+            }
+            */
+      //  面向对象
+      function Tab(box) {
+        this.box = document.getElementById(box);
+        this.btns = this.box.querySelectorAll("input");
+        this.divs = this.box.querySelectorAll("div");
+      }
+      Tab.prototype.init = function () {
+        const _this = this;
+        for (let i = 0; i < this.btns.length; i++) {
+          this.btns[i].index = i;
+          this.btns[i].onclick = function () {
+            _this.change(this);
+          };
+        }
+      };
+      Tab.prototype.change = function (that) {
+        for (let i = 0; i < this.btns.length; i++) {
+          this.btns[i].className = this.divs[i].className = "";
+        }
+        that.className = "active";
+        this.divs[that.index].className = "show";
+      };
+      const t = new Tab("box");
+      t.init();
+    </script>
+  </body>
+</html>
