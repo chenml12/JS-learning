@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 对象拷贝
+      //es6 对象的浅拷贝
+      /*
+      let obj1 = { a: 1, b: 2 };
+      let obj2 = { ...obj1 };
+      obj2.a = 3;
+      console.log(obj1); //{a: 1, b: 2}
+      console.log(obj2); //{a: 3, b: 2}
+
+      //对象合并
+      let payload = { title: "羊肉串", amount: 10, price: 2 };
+      let user = { uid: 1, shop_id: 20 };
+      let data = { ...payload, ...user };
+      console.log(data); //{title: "羊肉串", amount: 10, price: 2, uid: 1, shop_id: 20}
+      */
+      //数组拷贝
+      //数组的浅拷贝
+      /*
+      let arr1 = [1, 2, 3];
+      let arr2 = [...arr1];
+      arr1.push(4);
+      console.log(arr1); //[1,2,3,4]
+      console.log(arr2); //[1,2,3]
+      */
+      //数组合并
+      let arr1 = [1, 2];
+      let arr2 = [3, 4];
+      let arrData = [...arr1, ...arr2];
+      console.log(arrData); //[1,2,3,4]
+    </script>
+  </body>
+</html>

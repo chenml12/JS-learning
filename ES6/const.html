@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      const name = "张三";
+      name = "李四";
+      console.log(name); //Assignment to constant variable-常量变量赋值
+      */
+      //地址不变
+      /*
+      const arr = [1, 2, 3];
+      arr.push(4);
+      console.log(arr); //[1,2,3,4]
+      const obj = {
+        name: "es5",
+      };
+      obj.name = "es6";
+      console.log(obj);
+    */
+      //地址改变
+      /*
+      const arr = [1, 2];
+      arr = [1, 2, 3, 4];
+      console.log(arr); //Assignment to constant variable-常量变量赋值
+      */
+      const obj = {
+        name: "es5",
+      };
+      obj = {
+        name: "es5",
+      };
+      console.log(obj); //Assignment to constant variable-常量变量赋值
+    </script>
+  </body>
+</html>

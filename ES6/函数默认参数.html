@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //es5
+      // function getName(name) {
+      //   const newName = name || "张三";
+      //   console.log(newName);
+      // }
+      // getName();//张三
+      // getName("aa");//aa
+
+      // function getName(name) {
+      //   const newName = name != undefined ? name : "李四";
+      //   console.log(newName);
+      // }
+      // getName();//李四
+      // getName("aa");//aa
+
+      //es6
+      function getName(name = "aa") {
+        console.log(name);
+      }
+      getName(); //aa
+      getName("haha"); //haha
+    </script>
+  </body>
+</html>

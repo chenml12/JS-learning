@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //es5 换行
+      //   const str = "heoll \
+      //   world!";
+      //   const str = "heoll \n" + "world!";//用的最多
+      //   const str = "hello" + "world";
+      //   console.log(str);
+      //es6换行
+      //   const str = `hello
+      //     world`;
+      //   console.log(str);
+      //   const name = "张三";
+      //   const str = `欢迎${name}!`;
+      //   console.log(str);
+      const price = 10;
+      const amount = 3;
+      const str = `单价：${price};数量：${amount};总计：${(
+        price * amount
+      ).toFixed(2)}`;
+      console.log(str);
+    </script>
+  </body>
+</html>

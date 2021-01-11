@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1.作用域
+      //ES5
+      /*
+            if (1 == 1) {
+              var a = 10;
+            }
+            console.log(a); //10
+            //ES6
+            if (1 == 1) {
+              let a = 10;
+            }
+            console.log(a); // a is not defined
+            */
+      //2.不支持变量提升
+      /*
+            //ES5
+            console.log(a); //undefined
+            var a = 10;
+            //ES6
+            console.log(b); //Cannot access 'b' before initialization
+            let b = 20;
+            */
+      //3.let名不能重复声明
+      //   ES5
+      /*
+            var a = 1;
+            var a = 10;
+            console.log(a); //10
+            */
+      //   ES6
+      /*
+            let a = 10;
+            let a = 20;
+            console.log(a); // Identifier 'a' has already been declared
+            */
+      //4.循环作用域
+      // ES5  var声明的变量是全局的
+      //for (var i = 0; i < 10; i++) {}
+      //   console.log(i); //10
+      //   ES6
+      /*
+        let i = 1;
+        for (let i = 0; i < 10; i++) {}
+        console.log(i); //1
+        */
+      //   ES5
+      /*
+      for (var i = 0; i < 10; i++) {
+        setTimeout(function () {
+          console.log(i);//10
+        }, 100);
+      }*/
+      //ES6
+      /*
+      for (let i = 0; i < 10; i++) {
+        setTimeout(function () {
+          console.log(i); //0-9
+        }, 100);
+      }
+      */
+      //使用闭包让i变成局部作用域
+      for (var i = 0; i < 10; i++) {
+        (function ($i) {
+          setTimeout(function () {
+            console.log($i); //0-9
+          }, 100);
+        })(i);
+      }
+    </script>
+  </body>
+</html>
