@@ -199,7 +199,111 @@ let arrData = [...arr1, ...arr2];
 console.log(arrData); //[1,2,3,4]
 ````
 
-**Object.assign()** 
+   **Object.assign对象的拷贝与合并  **
 
-方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。
+Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。
 
+Object.assign()第一个参数是目标对象，后面的参数是源对象。
+
+常见用途：
+
+1.为对象添加属性
+
+2.为对象添加方法
+
+````javascript
+// Object.assign对象的拷贝与合并
+let target = { a: 1 };
+let source1 = { b: 2 };
+let source2 = { c: 3 };
+Object.assign(target, source1, source2);
+console.log(target); //{a: 1, b: 2, c: 3}
+````
+
+如果目标对象与源对象有同名属性，或多个源对象有同名属性，后面的属性会覆盖前面的属性
+
+`````javascript
+let target = { a: 1 };
+let source1 = { a: 11, b: 2 };
+let source2 = { b: 22, c: 3 };
+Object.assign(target, source1, source2);
+console.log(target); //{a: 11, b: 22, c: 3}
+`````
+
+  如果只有一个目标对象，直接返回该参数
+
+````javascript
+let target = { a: 1 };
+Object.assign(target);
+console.log(target);{ a: 1 };
+````
+
+如果目标对象不是一个对象，先转成对象
+
+````javascript
+let abc = Object.assign("abc");
+console.log(abc);
+console.log(abc[0], abc[1], abc[2]); //a  b   c
+````
+
+目标元素不能是undefined和null;
+
+````javascript
+Object.assign(undefined); //报错
+Object.assign(null);//报错
+````
+
+为对象添加属性
+
+````javascript
+
+function Person(name, age) {
+    // Object.assign(this, { name: name, age: age });
+    Object.assign(this, { name, age });
+    // 相当于
+    this.name = name;
+    this.age.age;
+}
+let person = new Person("张三", 20);
+console.log(person.name, person.age); //张三 20
+````
+
+为对象添加方法
+
+`````javascript
+Object.assign(Person.prototype, {
+    //   say:function(){} es5
+    say() {
+        console.log("say()方法");
+    },
+    run() {
+        console.log("run()方法");
+    },
+});
+//相当于 es5
+//   Person.prototype.say=function(){
+//     console.log("say()方法");
+//   }
+//   Person.prototype.run = function () {
+//     console.log("run()方法");
+//   };
+
+person.say();
+person.run();
+`````
+
+**对象字面量**
+
+1. 属性初始值的书写
+
+`````javascript
+let title = "es6";
+let price = 12;
+//es5
+let book = { title: title, price: price };
+//es6
+let book = { title, price };
+console.log(book); //{title: "es6", price: 12}
+`````
+
+2. 对象方法的简写

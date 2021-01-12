@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Object.assign对象的拷贝与合并
+      /*
+        let target = { a: 1 };
+        let source1 = { b: 2 };
+        let source2 = { c: 3 };
+        Object.assign(target, source1, source2);
+        console.log(target); //{a: 1, b: 2, c: 3}
+       */
+      // 如果目标对象与源对象有同名属性，或多个源对象有同名属性，后面的属性会覆盖前面的属性
+      /*
+        let target = { a: 1 };
+        let source1 = { a: 11, b: 2 };
+        let source2 = { b: 22, c: 3 };
+        Object.assign(target, source1, source2);
+        console.log(target); //{a: 11, b: 22, c: 3}
+        */
+      //如果只有一个目标对象，直接返回该参数
+      /*
+        let target = { a: 1 };
+        Object.assign(target);
+        console.log(target);{ a: 1 };
+        */
+      //如果目标对象不是一个对象，先转成对象
+      /*
+        let abc = Object.assign("abc");
+        console.log(abc);
+        console.log(abc[0], abc[1], abc[2]); //a  b   c
+       */
+      //目标元素不是undefined和null;
+      /*
+        Object.assign(undefined); //报错
+        Object.assign(null); //报错
+      */
+
+      //为对象添加属性
+      function Person(name, age) {
+        // Object.assign(this, { name: name, age: age });
+        Object.assign(this, { name, age });
+        // 相当于
+        this.name = name;
+        this.age.age;
+      }
+      let person = new Person("张三", 20);
+      console.log(person.name, person.age); //张三 20
+
+      // 为对象添加方法
+      Object.assign(Person.prototype, {
+        //   say:function(){} es5
+        say() {
+          console.log("say()方法");
+        },
+        run() {
+          console.log("run()方法");
+        },
+      });
+      //相当于 es5
+      //   Person.prototype.say=function(){
+      //     console.log("say()方法");
+      //   }
+      //   Person.prototype.run = function () {
+      //     console.log("run()方法");
+      //   };
+
+      person.say();
+      person.run();
+    </script>
+  </body>
+</html>
