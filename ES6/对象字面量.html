@@ -8,14 +8,45 @@
   <body>
     <script>
       // 属性初始值的书写
+      /*
       let title = "es6";
       let price = 12;
       //es5
-      let book = { title: title, price: price };
+      // let book = { title: title, price: price };
       //es6
       let book = { title, price };
       console.log(book); //{title: "es6", price: 12}
+      */
       // 对象方法的
+      /*
+      let person = {
+        // say: function () {
+        //   console.log("say()方法");
+        // },
+        //简写
+        say() {
+          console.log("say()方法");
+        },
+      };
+      person.say();
+      */
+      // 计算属性名
+      // es5
+      /*
+      let person = {};
+      let age = "age";
+      person["first-name"] = "李";
+      person["last-name"] = "四";
+      person[age] = 20;
+      console.log(person); //{first-name: "李", last-name: "四", age: 20}
+      */
+      let ageAttr = "age";
+      let person = {
+        ["first-name"]: "李",
+        ["last-name"]: "四",
+        [ageAttr]: 10,
+      };
+      console.log(person); //{first-name: "李", last-name: "四", age:10}
     </script>
   </body>
 </html>

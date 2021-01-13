@@ -7,17 +7,61 @@
   </head>
   <body>
     <script>
+      // let person = {
+      //   name: "张三",
+      //   age: 15,
+      // };
+      //es5
+      // var name = person.name;
+      // var age = person.age;
       //es6
+      // let { name, age } = person;
+      //es6方式二
+      // let name, age;
+      // ({ name, age } = person); //左边不能是{}-代码块   用（）括起来就变成一个表达式
+
+      // console.log(name, age); //张三 15
+
+      // 设置默认值
+      // let { name, age, city = "北京" } = person;
+      // console.log(name, age, city); //张三 15  北京
+      // // 别名
+      // let { name: pName, age, city = "北京" } = person;
+      // let name = "李四";
+      // console.log(pName, age, city, name); //张三 15  北京 李四
+      // 嵌套取值
       /*
-      let obj1 = { a: 1, b: 2 };
-      let obj2 = { ...obj1 };
-      obj2.a = 5;
-      console.log(obj1);
-      console.log(obj2);
+      let person = {
+        name: "张三",
+        age: 50,
+        change: {
+          name: "李四",
+          age: 28,
+          change: {
+            name: "小李四",
+            age: 2,
+          },
+        },
+      };
+      let {
+        change: { name },
+      } = person;
+      console.log(name); //李四
+      let {
+        change: {
+          change: { name: nName },
+        },
+      } = person;
+      console.log(nName); //小李四
       */
 
-      let { foo, bar } = { foo: "aaa", bar: "bbb" };
-      console.log(foo); //aaa
+      // 与扩展运算符--浅拷贝
+      let person = {
+        name: "张三",
+        age: 15,
+      };
+      let { ...personObj } = person;
+      console.log(personObj); // {name: "张三", age: 15}
     </script>
   </body>
 </html>

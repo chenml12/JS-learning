@@ -85,6 +85,50 @@ getName("haha"); //haha
 
 1. 数组解构赋值
 
+```javascript
+//es5
+let arr = [1, 2, 3];
+let a = arr[0],
+    b = arr[1],
+    c = arr[2];
+console.log(a, b, c); //1  2   3
+//es6
+let [a, b, c] = [1, 2, 3];
+console.log(a,b,c); //1  2  3
+```
+
+嵌套取值
+
+````javascript
+let arr = ["java", "php", ["javascript", "css", "html"]];
+// let [a, , [...j]] = arr;
+// console.log(a, j); //  java    ["javascript", "css", "html"]
+let [a, , ...html] = arr;
+console.log(html); //["javascript", "css", "html"]
+console.log(html[0]); //["javascript", "css", "html"]
+console.log(html[0][0]); //javascript
+//let [a, , [...html]] = arr;
+//console.log(html); // ["javascript", "css", "html"];
+//console.log(html[0]); //javascript
+
+// --------------有无````的区别-------------
+let [aa, , html2] = arr;
+console.log(html2); //["javascript", "css", "html"]
+console.log(html2[0]); // javascript;
+````
+
+浅拷贝
+
+````javascript
+let book = ["java", "php", ["javascript", "css", "html"]];
+let [...newBooks] = book;
+console.log(newBooks); // ["java", "php", ["javascript", "css", "html"]];
+console.log(...newBooks); //java, php, ["javascript", "css", "html"];
+````
+
+
+
+
  如果解构不成功，变量的值就等于`undefined`。 
 
 ````javascript
@@ -137,13 +181,95 @@ let [x = 1, y = x] = [1, 2]; // x=1; y=2
 let [x = y, y = 1] = [];     // ReferenceError: y is not defined
 ````
 
+2. 对象解构赋值
+
+````javascript
+let person = {
+    name: "张三",
+    age: 15,
+};
+//es5
+// var name = person.name;
+// var age = person.age;
+//es6
+// let { name, age } = person;
+//es6方式二
+let name, age;
+ ({ name, age } = person); //左边不能是{}-代码块   用（）括起来就变成一个表达式
+
+ console.log(name, age); //张三 15
+
+````
+
+设置默认值
+
+````javascript
+// 设置默认值
+let person = {
+    name: "张三",
+    age: 15,
+};
+let { name, age, city = "北京" } = person;
+console.log(name, age, city); //张三 15  北京
+````
+
+别名
+
+````javascript
+let person = {
+    name: "张三",
+    age: 15,
+};
+let { name: pName, age, city = "北京" } = person;
+let name = "李四";
+console.log(pName, age, city, name); //张三 15  北京 李四
+````
+
+嵌套取值
+
+````javascript
+let person = {
+    name: "张三",
+    age: 50,
+    change: {
+        name: "李四",
+        age: 28,
+        change: {
+            name: "小李四",
+            age: 2,
+        },
+    },
+};
+let {
+    change: { name },
+} = person;
+console.log(name); //李四
+let {
+    change: {
+        change: { name: nName },
+    },
+} = person;
+console.log(nName);//小李四
+````
+
+与扩展运算符结合使用
+
+`````javascript
+//浅拷贝
+let person = {
+    name: "张三",
+    age: 15,
+};
+let { ...personObj } = person;
+console.log(personObj); // {name: "张三", age: 15}
+`````
 
 
-1. 对象解构赋值
 
 对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。
 
 ```javascript
+
 let { bar, foo } = { foo: 'aaa', bar: 'bbb' };
 foo // "aaa"
 bar // "bbb"
@@ -159,7 +285,9 @@ let {foo} = {bar: 'baz'};
 foo // undefined
 ```
 
-****
+
+
+
 
 **扩展运算符（...）**
 
@@ -307,3 +435,39 @@ console.log(book); //{title: "es6", price: 12}
 `````
 
 2. 对象方法的简写
+
+````javascript
+let person = {
+    // say: function () {
+    //   console.log("say()方法");
+    // },
+    //简写
+    say() {
+        console.log("say()方法");
+    },
+};
+person.say();
+````
+
+计算属性名
+
+````javascript
+// es5
+/*
+      let person = {};
+      let age = "age";
+      person["first-name"] = "李";
+      person["last-name"] = "四";
+      person[age] = 20;
+      console.log(person); //{first-name: "李", last-name: "四", age: 20}
+      */
+//es6
+let ageAttr = "age";
+let person = {
+    ["first-name"]: "李",
+    ["last-name"]: "四",
+    [ageAttr]: 10,
+};
+console.log(person); //{first-name: "李", last-name: "四", age:10}
+````
+
