@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //正常函数写法
+      //   function person() {
+      //     console.log("大家好!");
+      //   }
+      //箭头函数写法
+      //   let person = () => {
+      //     console.log("大家好");
+      //   };
+      //   person();
+
+      //return
+      /*
+      let person = () => "大家好";
+      // 相当于
+      //   function person() {
+      //     return "大家好";
+      //   }
+      console.log(person());
+      */
+      //传参
+      /*
+      //   let person = (name, age) => {
+      //     console.log(name, age);
+      //   };
+      //   person("小明", 12);
+      //只有一个参数是可以简写可以不用()
+      let person = (name) => {
+        console.log(name);
+      };
+      person("小明");
+      */
+      //   arguments
+      /*
+      function person() {
+        let arg = arguments;
+        console.log(arg);
+      }
+      person(1, 2, 3);
+      */
+      //es6写法
+      let person = (...args) => {
+        console.log(args);
+      };
+      person(1, 2, 3);
+    </script>
+  </body>
+</html>

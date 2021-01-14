@@ -471,3 +471,181 @@ let person = {
 console.log(person); //{first-name: "李", last-name: "四", age:10}
 ````
 
+**模块化**
+
+注意：
+
+1.  需要在服务器环境下打开才不会报错
+
+   vscode可以安装 Live Server   安装成功--需要查看的文件右键- open with Live Server
+
+2.  script  标签必须写   type="module"
+
+在ES6之前的javascript中是没有模块化概念的。如果要进行模块化操作，需要引入第三方的类库，如：requireJS与seaJS，requireJS是AMD规范，seaJS是CMD规范。
+
+ES6现已支持模块化开发规范ES Module，让Javascript支持原生模块化开发。ES Module把一个文件当作一个模块，每个模块有自己的独立作用域，核心点就是模块的导入（import）与导出（export）。
+
+模块化的好处：
+
+1. 避免变量污染，命名冲突
+
+2. 提高代码复用率
+
+3. 提高维护性
+
+4. 可以提升执行效率
+
+5. 避免引入时的层层依赖
+
+单个导入模块
+
+````html
+<script type="module">  // type="module"必须写
+    // import { name, age, URL, getName } from "./global.js";
+    //起别名（用as连接）
+    // import { name as oldName, age, URL, getName } from "./global.js";//导入时起别名
+    import { oldName, age, URL, getName } from "./global.js";//导出时已经去好了别名
+    let name = "王五";//命名冲突时需要起别名
+    console.log(name, oldName);
+    console.log(age);
+    console.log(URL);
+    console.log(getName());
+</script>
+````
+
+````javascript
+//   导出
+//单个导出方式一
+// export let name='张三';
+// export let age=20;
+// export const URL='https://www.baidu.com'
+// //导出方法
+// export function getName(){
+//     return '李四';
+// }
+//单个导出方式二
+ let name='张三';
+ let age=20;
+ const URL='https://www.baidu.com'
+//导出方法
+ function getName(){
+    return '李四';
+}
+export{
+    name as oldName,
+    // name,
+    age,
+    URL,
+    getName
+}
+````
+
+导入整个模块
+
+````html
+<script type="module">
+//导入整个模块
+// import * as person from "./global2.js";
+// console.log(person.name);
+// console.log(person.age);
+// console.log(person.URL);
+// console.log(person.getName());
+// 方式二
+import person from "./default.js";
+console.log(person.name, person.age);
+</script>
+````
+
+````javascript
+//   导出
+let name='张三';
+let age=20;
+const URL='https://www.baidu.com'
+//导出方法
+function getName(){
+return '李四';
+}
+export{
+name as oldName,
+// name,
+age,
+URL,
+getName
+}
+
+//default
+
+let name="张三";
+let age=12;
+function getName(){
+    return '李四';
+}
+export default {
+    name,
+    age,
+    getName
+}
+
+````
+
+**箭头函数**
+
+箭头函数没有自己的this，arguments，super或new.target  
+
+ 箭头函数表达式更适用于那些本来需要匿名函数的地方，并且它不能用作构造函数。  
+
+````javascript
+//正常函数写法
+//   function person() {
+//     console.log("大家好!");
+//   }
+//箭头函数写法
+let person = () => {
+    console.log("大家好");
+};
+person();
+````
+
+return
+
+````javascript
+let person = () => "大家好";
+// 相当于
+//   function person() {
+//     return "大家好";
+//   }
+console.log(person());//大家好
+````
+
+传参
+
+````javascript
+let person = (name, age) => {
+    console.log(name, age);
+};
+person("小明", 12);
+
+//只有一个参数是可以简写可以不用()
+let person = (name) => {
+    console.log(name);
+};
+person("小明");
+````
+
+arguments
+
+````javascript
+function person() {
+    let arg = arguments;
+    console.log(arg);
+}
+person(1, 2, 3);
+
+//es6写法
+let person = (...args) => {
+    console.log(args);
+};
+
+person(1, 2, 3);
+````
+

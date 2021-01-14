@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      //单个导入
+      // import { name, age, URL, getName } from "./global.js";
+      //起别名（用as；连接）
+      // import { name as oldName, age, URL, getName } from "./global.js";
+      import { oldName, age, URL, getName } from "./global.js";
+      let name = "王五";
+      console.log(name, oldName);
+      console.log(age);
+      console.log(URL);
+      console.log(getName());
+    </script>
+  </body>
+</html>
