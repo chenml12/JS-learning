@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Promise就是一个对象，用来传递异步操作的消息。可以解决回调函数的嵌套问题，也就是所谓的“回调地狱”。
+      // 咱们先看一下“回调地狱”的案例：
+      /*
+        ajax("http://www.lucklnk.com", "get", function () {
+          ajax("http://www.lucklnk.com", "get", function () {
+            ajax("http://www.lucklnk.com", "get", function () {});
+          });
+        });
+        */
+      //  基本用法
+      // ES6 规定，Promise对象是一个构造函数，用来生成Promise实例。
+      //利用定时器模拟ajax
+      /*
+      let code = 200;
+      let p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (code == 200) {
+            //执行成功调用resolve函数
+            console.log("成功！");
+          } else {
+            console.log("失败");
+          }
+        }, 100);
+      });
+      p1.then((result) => {
+        //成功对应的是resolve
+        console.log(result);
+      }).catch((result) => {
+        //失败对应的是reject
+        console.log(result);
+      });
+      */
+
+      //封装ajax
+      function request(method, url, data) {
+        let request = new XMLHttpRequest(); //实例化ajax
+        return new Promise((resolve, reject) => {
+          request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+              //服务器连接已建立
+              if (request.status === 200) {
+                //连接成功
+                resolve(request.responseText);
+              } else {
+                reject(request.status);
+              }
+            }
+          };
+          request.open(method, url);
+          request.send(data);
+        });
+      }
+      //使用
+      request(
+        "get",
+        "http://vueshop.glbuys.com/api/home/index/nav?token=1ec949a15fb709370f"
+      )
+        .then((result) => {
+          onsole.log(JSON.parse(result));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

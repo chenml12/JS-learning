@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //正常函数写法
+      //   function person() {
+      //     console.log("大家好!");
+      //   }
+      //箭头函数写法
+      //   let person = () => {
+      //     console.log("大家好");
+      //   };
+      //   person();
+
+      //return
+      /*
+       let person = () => "大家好";
+       // 相当于
+       //   function person() {
+       //     return "大家好";
+       //   }
+       console.log(person());
+       */
+      //传参
+      /*
+       //   let person = (name, age) => {
+       //     console.log(name, age);
+       //   };
+       //   person("小明", 12);
+       //只有一个参数是可以简写可以不用()
+       let person = (name) => {
+         console.log(name);
+       };
+       person("小明");
+       */
+
+      //arguments
+      /*
+       //es5
+       function person() {
+         let arg = arguments;
+         console.log(arg);
+       }
+       person(1, 2, 3);
+       */
+      //es6写法
+      /*
+       let person = (...args) => {
+         console.log(args);
+       };
+       person(1, 2, 3, "你好");
+       */
+      //返回对象字面量
+      //es5
+      /*
+       function person() {
+         return { name: "李四", age: 20 };
+       }
+       //es6
+       // let person = () => ({ name: "李四", age: 20 });
+       console.log(person()); //{ name: "李四", age: 20 }
+       */
+      //  高阶函数
+      //es5
+      // function person() {
+      //   return function (wrap) {
+      //     return function (prop) {
+      //       console.log(wrap, prop); //wrap prop
+      //     };
+      //   };
+      // }
+
+      /*
+        //es6
+       let person = () => (wrap) => (prop) => {
+         console.log(wrap, prop);
+       };
+       person()("wrap")("prop");
+      */
+      // this指向
+      //es5
+      /*
+       let person = {
+         name: "张三",
+         getName: function () {
+           let _this = this;
+           setTimeout(function () {
+             console.log(_this); //指向person本身
+             console.log(_this.name);
+           }, 100);
+         },
+       };
+       let getName = person.getName.bind(person);
+       getName();
+      */
+      //es6
+      let person = {
+        name: "张三",
+        getName: function () {
+          //没有this往上级找
+          setTimeout(() => {
+            console.log(this); //指向person本身
+            console.log(this.name);
+          }, 100);
+        },
+      };
+      let getName = person.getName.bind(person);
+      getName();
+    </script>
+  </body>
+</html>

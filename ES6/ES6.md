@@ -649,3 +649,122 @@ let person = (...args) => {
 person(1, 2, 3);
 ````
 
+返回对象字面量
+
+````javascript
+//es5
+function person() {
+return { name: "李四", age: 20 };
+}
+//es6
+// let person = () => ({ name: "李四", age: 20 });
+console.log(person()); //{ name: "李四", age: 20 }
+````
+
+高阶函数
+
+````javascript
+//es5
+// function person() {
+//   return function (wrap) {
+//     return function (prop) {
+//       console.log(wrap, prop); //wrap prop
+//     };
+//   };
+// }
+//es6
+let person = () => (wrap) => (prop) => {
+    console.log(wrap, prop);
+};
+person()("wrap")("prop");
+````
+
+this指向
+
+```javascript
+//es5
+
+let person = {
+    name: "张三",
+    getName: function () {
+        let _this = this;
+        setTimeout(function () {
+            console.log(_this); //指向person本身
+            console.log(_this.name);
+        }, 100);
+    },
+};
+let getName = person.getName.bind(person);
+getName();
+
+//es6    
+let person = {
+    name: "张三",
+    getName: function () {
+        //没有this往上级找
+        setTimeout(() => {
+            console.log(this); //指向person本身
+            console.log(this.name);
+        }, 100);
+    },
+};
+let getName = person.getName.bind(person);
+getName();
+```
+
+**promise**
+
+Promise就是一个对象，用来传递异步操作的消息。可以解决回调函数的嵌套问题，也就是所谓的“回调地狱”。
+
+“回调地狱”的案例：
+
+````javascript
+ajax("http://www.lucklnk.com","get",function(){
+    ajax("http://www.lucklnk.com","get",function(){
+        ajax("http://www.lucklnk.com","get",function(){
+        })
+    })
+});
+````
+
+一个Promise有以下几种状态:
+
+1、pending: 初始状态，既不是成功，也不是失败状态。
+
+2、fulfilled: 意味着操作成功完成。
+
+3、rejected: 意味着操作失败。
+
+如果异步操作成功，resolve 方法将 Promise 的状态，从“未完成”变为“成功”（即从 pending 变为 fulfilled）。
+
+如果异步操作失败，reject 方法将 Promise 对象的状态，从“未完成”变为“失败”（即从 pending 变为 rejected）。
+
+如果执行resolve 方法，对应的会调用then方法，then方法传入一个函数作为参数，该函数的参数的值就是resolve 方法的实参。
+
+如果执行reject方法，对应的会调用catch方法，catch方法传入一个函数作为参数，该函数的参数的值就是reject方法的实参。
+
+````javascript
+//利用定时器模拟ajax
+let code = 200;
+let p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        if (code == 200) {
+            //执行成功调用resolve函数
+            console.log("成功！");
+        } else {
+            console.log("失败");
+        }
+    }, 100);
+});
+p1.then((result) => {
+    //成功对应的是resolve
+    console.log(result);
+}).catch((result) => {
+    //失败对应的是reject
+    console.log(result);
+});
+
+````
+
+
+
