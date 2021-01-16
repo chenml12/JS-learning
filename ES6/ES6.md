@@ -766,5 +766,6 @@ p1.then((result) => {
 
 ````
 
+**class类**
 
-
+JavaScript语言的传统方法是通过构造函数，定义并生成新对象。function既是对象，对象既是function，没有class的概念。ES6提供了更接近传统语言的写法，比如：JAVA、PHP等后端语言，引入了Class（类）这个概念，作为对象的模板。通过class关键字，可以定义类。可以实现：单例模式、访问器属性、静态方法、extends继承
