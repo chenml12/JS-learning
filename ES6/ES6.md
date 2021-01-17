@@ -769,3 +769,134 @@ p1.then((result) => {
 **class类**
 
 JavaScript语言的传统方法是通过构造函数，定义并生成新对象。function既是对象，对象既是function，没有class的概念。ES6提供了更接近传统语言的写法，比如：JAVA、PHP等后端语言，引入了Class（类）这个概念，作为对象的模板。通过class关键字，可以定义类。可以实现：单例模式、访问器属性、静态方法、extends继承
+
+````javascript
+//es5
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+Person.prototype.show = function () {
+    console.log(this.name, this.age);
+};
+var person = new Person("张三", 20);
+person.show();
+
+````
+
+es6 --class
+--常用
+
+````javascript
+class Person {
+    //构造函数
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    show() {
+        console.log(this.name); //张三
+    }
+}
+var person = new Person("张三", 20);
+person.show();
+
+````
+
+表达式的形式来定义
+
+````javascript
+let Person = class {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    show() {
+        console.log(this.name);
+    }
+};
+var person = new Person("张三", 20);
+person.show();
+
+````
+
+单例模式
+
+````javascript
+let Person = new (class {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+})("张三", 12);
+console.log(Person.name, Person.age);
+
+
+````
+
+访问器属性
+
+````javascript
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.ageText = "";
+    }
+    //监听属性值的变化，设置值
+    set age(val) {
+        //   console.log(val);
+        if (val >= 18) {
+            this.ageText = "成人";
+        } else {
+            this.ageText = "未成年";
+        }
+    }
+    get age() {
+        return this.ageText;
+    }
+}
+let person = new Person("张三", 11);
+person.age = 30; //改变才能触发
+console.log(person.ageText);
+
+````
+
+静态方法
+
+````javascript
+class Person {
+    static show() {
+        console.log("我是静态方法");
+    }
+}
+Person.show();
+
+````
+
+extends继承
+
+````javascript
+//父类(基类)
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+    run() {
+        console.log("人类");
+    }
+}
+//子类(派生类)
+class Superman extends Person {
+    // constructor(name) {
+    //   super(name); //调用父类Person的constructor(name)
+    // }
+    // run() {
+    //   super.run(); //使用super调用父类的方法
+    //   console.log(this.name + "在跑步");
+    // }
+}
+let s1 = new Superman("超人");
+console.log(s1.name)
+````
+
