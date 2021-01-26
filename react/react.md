@@ -20,27 +20,27 @@ ReactDOM.render(要渲染的内容，放置内容的容器)
 
 ref只能获取本组件的元素
 
-````javascript
+````react
 import React from 'react';
 import ReactDom from 'react-dom';
 import HeaderComponent from './components/header';
 class App extends React.Component{
-  componentDidMount(){
-    console.log(this.refs['goods'])//本组件获取元素
-    // console.log(document.getElementById('header'))//跨组件获取元素---不建议获取dom（消耗性能）
-    let header=ReactDom.findDOMNode(document.getElementById('header'))
-    console.log(header,'虚拟dom')
-  }
-  render(){
-    const name='hello'
-    return(
-      <div className="App">
-        <HeaderComponent></HeaderComponent>
-     {name}
-     <div ref='goods'>商品</div>
-      </div>
-    )
-  }
+    componentDidMount(){
+        console.log(this.refs['goods'])//本组件获取元素
+        // console.log(document.getElementById('header'))//跨组件获取元素---不建议获取dom（消耗性能）
+        let header=ReactDom.findDOMNode(document.getElementById('header'))
+        console.log(header,'虚拟dom')
+    }
+    render(){
+        const name='hello'
+        return(
+            <div className="App">
+                <HeaderComponent></HeaderComponent>
+                {name}
+                <div ref='goods'>商品</div>
+            </div>
+        )
+    }
 }
 
 
@@ -72,31 +72,30 @@ xml:可扩展（自定义）标记语言
 
 2、通过 JSX , 你传递一个函数作为事件处理程序，而不是一个字符串。
 
-````javascript
+````react
 <button onclick="activateLasers()">
-  Activate Lasers
+    Activate Lasers
 </button>
 
 //在 React 中略有不同：
 <button onClick={this.activateLasers.bind(this)}>
-  Activate Lasers
+    Activate Lasers
 </button>
-
 ````
 
 
 
-条件渲染**
+**条件渲染**
 
 1. 三元表达式
 2. &&
 
-````javascript
+````react
 this.state={
     bShow:true
 } 
 {this.state.bShow? <div className='box'></div>:''}//三元
- {this.state.bShow&& <div className='box'></div>}//&&
+{this.state.bShow&& <div className='box'></div>}//&&
 ````
 
 **React Props**
@@ -105,9 +104,9 @@ this.state={
 
 props默认值
 
-````javascript
+````react
 //父组件传值
-  <HeaderComponent title='首页' isShow={true}></HeaderComponent>
+<HeaderComponent title='首页' isShow={true}></HeaderComponent>
 
 //子组件接收
 import React, { Component } from 'react';
@@ -135,9 +134,9 @@ HeaderComponent.defaultProps={
 
 第二个参数是回调函数。
 
-````javascript
+````react
 this.setState({name:"李四",age:20},()=>{
-console.log(this.state.name);
+    console.log(this.state.name);
 });
 ````
 
@@ -199,7 +198,7 @@ console.log(this.state.name);
    
       在组件从 DOM 中移除的时候立刻被调用。（当离开页面时调用）
    
-   ````javascript
+   ````react
    import React from "react";
    import ReactDom from "react-dom";
    import HeaderComponent from "./components/header";
@@ -288,33 +287,98 @@ console.log(this.state.name);
            const name = "hello";
            return (
                <div className="App">
-               <HeaderComponent title="首页" isShow={true}></HeaderComponent>
-   {name}
-   <div ref="goods">商品</div>
-   {/* {this.state.bShow? <div className='box'></div>:''} */}
-   {this.state.bShow && <div className="box"></div>}
-    <button type="button" onClick={this.changeShow.bind(this)}>
-        显示/隐藏
-   </button>
-   <ul>
-        {this.state.goods.map((item, index) => {
-            return (
-                <li key={index}>
-                {index}.{item.title}
-   </li>
-   );
-   })}
-       </ul>
-   <button onClick={this.changeStateTitle.bind(this)}>
-       {this.state.stateTitle}
-   </button>
-   </div>
-   );
-   }
+                   <HeaderComponent title="首页" isShow={true}></HeaderComponent>
+                   {name}
+                   <div ref="goods">商品</div>
+                   {/* {this.state.bShow? <div className='box'></div>:''} */}
+                   {this.state.bShow && <div className="box"></div>}
+                   <button type="button" onClick={this.changeShow.bind(this)}>
+                       显示/隐藏
+                   </button>
+                   <ul>
+                       {this.state.goods.map((item, index) => {
+                           return (
+                               <li key={index}>
+                                   {index}.{item.title}
+                               </li>
+                           );
+                       })}
+                   </ul>
+                   <button onClick={this.changeStateTitle.bind(this)}>
+                       {this.state.stateTitle}
+                   </button>
+               </div>
+           );
+       }
    }
    
    export default App;
    
    ````
    
-   ****
+
+**事件**
+
+1. onclick:点击事件
+
+   bind call apply区别
+
+    三者都是用于改变函数体内this的指向
+
+   区别：
+
+   bind不会立即调用，返回一个新函数，称为绑定函数，其内的this指向为创建它时传入bind的第一个参数，而传入bind的第二个及以后的参数作为原函数的参数来调用原函数。 
+
+    apply和call的调用返回函数执行结果
+
+    如果使用apply或call方法，那么this指向他们的第一个参数，apply的第二个参数是一个参数数组，call的第二个及其以后的参数都是数组里面的元素，就是说要全部列举出来；
+
+   ````react
+   import React from "react";
+   class Click extends React.Component {
+       constructor() {
+           super();
+           this.state = {};
+       }
+       click(val) {
+           console.log(val);
+       }
+       clickes6 = () => {
+           console.log("点击事件es6");
+       };
+   render() {
+       return (
+           <div>
+               <button type="button" onClick={this.click.bind(this, "点击事件传参")}>
+                   点击事件
+               </button>
+               <button type="button" onClick={this.clickes6}>
+                   点击事件es6
+               </button>
+               <button
+                   type="button"
+                   onClick={() => {
+                       this.click("点击事件2");
+                   }}
+                   >
+                   点击事件2
+               </button>
+           </div>
+       );
+   }
+   }
+   export default Click;
+   
+   ````
+
+   2. onMouseOver:鼠标移动元素上
+
+      onMouseOut:鼠标离开元素
+
+      onMouseMove：鼠标移动
+
+      onTouchStart：触摸开始
+
+      onTouchMove：触摸移动
+
+      onTouchEnd：触摸结束
