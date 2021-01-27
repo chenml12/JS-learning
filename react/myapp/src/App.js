@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDom from "react-dom";
 import HeaderComponent from "./components/header";
+import Input from "./components/input";
 import Click from "./pages/click.js";
 import "./assets/css/app.css";
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      text: "",
       bShow: true,
       goods: [
         {
@@ -34,17 +36,17 @@ class App extends React.Component {
     console.log("componentWillReceiveProps", newProps, 11111111);
   }
   //返回一个布尔值。false为不更新组件，true为更新，在组件接收到新的props或者state时被调用。在初始化时不被调用。可以在你确认不需要更新组件时使用。用于优化
-  shouldComponentUpdate(newProps, newState) {
-    console.log(newProps, newState, 11111111);
-    //ESLint代码检测
-    /*eslint-disable*/
-    if (this.state.bShow == newState.bShow) {
-      return false;
-    } else {
-      return true;
-    }
-    /*eslint-enable*/
-  }
+  // shouldComponentUpdate(newProps, newState) {
+  //   // console.log(newProps, newState, 11111111);
+  //   //ESLint代码检测
+  //   /*eslint-disable*/
+  //   if (this.state.bShow == newState.bShow) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  //   /*eslint-enable*/
+  // }
   //在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。16.10之后UNSAFE_componentWillUpdate
   componentWillUpdate(nextProps, nextState) {
     console.log("componentWillUpdate", nextProps, nextState);
@@ -82,13 +84,28 @@ class App extends React.Component {
   componentWillUnmount() {
     console.log("componentWillUnmount");
   }
-
+  getChild(val) {
+    console.log(val);
+  }
   render() {
     const name = "hello";
     return (
       <div className="App">
-        <HeaderComponent title="首页" isShow={true}></HeaderComponent>
+        <HeaderComponent
+          title="首页"
+          isShow={true}
+          sendParent={this.getChild.bind(this)}
+        ></HeaderComponent>
+        <Input
+          onChange={(ev) => {
+            this.setState({
+              text: ev.target.value,
+            });
+          }}
+        />
 
+        {this.state.text}
+        <br />
         {name}
         <div ref="goods">商品</div>
         {/* {this.state.bShow? <div className='box'></div>:''} */}

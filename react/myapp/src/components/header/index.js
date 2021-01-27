@@ -8,6 +8,9 @@ class HeaderComponent extends Component {
       <div id="header">
         {/* 用props接收 */}
         {this.props.title}
+        <button onClick={this.props.sendParent.bind(this, "这个是子组件的值")}>
+          点击
+        </button>
       </div>
     );
   }

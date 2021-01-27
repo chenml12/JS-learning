@@ -371,14 +371,24 @@ this.setState({name:"李四",age:20},()=>{
    
    ````
 
-   2. onMouseOver:鼠标移动元素上
+   onMouseOver:鼠标移动元素上
 
-      onMouseOut:鼠标离开元素
+   onMouseOut:鼠标离开元素
 
-      onMouseMove：鼠标移动
+   onMouseMove：鼠标移动
 
-      onTouchStart：触摸开始
+   onTouchStart：触摸开始
 
-      onTouchMove：触摸移动
+   onTouchMove：触摸移动
 
-      onTouchEnd：触摸结束
+   onTouchEnd：触摸结束
+   
+   **模拟双向绑定  **
+   
+   ````react
+   {/*可以输入的默认值属性：defaultValue*/}
+   <input type="text" placeholder="模拟双向绑定" value={this.state.bindval} onChange={(e)=>{this.setState({bindval:e.target.value})}}  />
+   
+   ````
+   
+   
