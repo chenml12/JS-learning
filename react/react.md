@@ -391,4 +391,80 @@ this.setState({name:"李四",age:20},()=>{
    
    ````
    
+   **父子组件传值**
+   
+   ````react
+   //父组件
+   import React from "react";
+   import Button from "./components/button";
+   class App extends React.Component {
+       constructor() {
+           super();
+           this.state = {};
+       }
+       del() {
+           console.log("删除");
+       }
+       render() {
+           return (
+               <div className="App">
+                   <form action="https://www.baidu.com" target="_blank">
+                       <input type="text" />
+                       <Button type="submit">提交</Button>
+                       <Button type="reset">重置</Button>
+                   </form>
+                   <Button
+                       className="btn-bg"
+                       style={{
+                           width: "100px",
+                               height: "30px",
+                                   color: "red",
+                                       fontSize: "20px",
+                       }}
+                       onClick={this.del.bind(this)}
+                       >
+                       删除
+                   </Button>
+                   <Button type="button">修改</Button>
+               </div>
+           );
+       }
+   }
+   
+   export default App;
+   
+   ````
+   
+   ````react
+   //子组件
+   import React, { Component } from "react";
+   import "./style.css";
+   export default class InputComponent extends Component {
+       render() {
+           return (
+               // 定义组件的时候return里最外层包裹的div不想渲染到页面，那么就用到Fragment组件
+               <React.Fragment>
+                   <button
+                       type={this.props.type}
+                       className={"my-button " + this.props.className}
+                       style={this.props.style}
+                       onClick={this.props.onClick}
+                       >
+                       {/* 插槽子页面: */}
+                       {this.props.children}
+                       {/*调用父级App组件里的内容*/}
+                   </button>
+               </React.Fragment>
+           );
+       }
+   }
+   //默认属性
+   InputComponent.defaultProps = {
+       type: "button",
+   };
+   
+   ````
+   
+   **懒加载（按需加载）**
+   
    
