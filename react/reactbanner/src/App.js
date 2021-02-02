@@ -5,23 +5,28 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      images: [
-        {
-          src: require("./assets/images/banner1.jpg").default,
-          url: "https://www.baidu.com/",
-        },
-        {
-          src: require("./assets/images/banner2.jpg").default,
-          url: "https://www.baidu.com/",
-        },
-        {
-          src: require("./assets/images/banner3.jpg").default,
-          url: "https://www.baidu.com/",
-        },
-      ],
+      images: [],
     };
   }
-
+  componentDidMount() {
+    let images = [
+      {
+        src: require("./assets/images/banner1.jpg").default,
+        url: "https://www.baidu.com/",
+      },
+      {
+        src: require("./assets/images/banner2.jpg").default,
+        url: "https://www.taobao.com/",
+      },
+      {
+        src: require("./assets/images/banner3.jpg").default,
+        url: "https://github.com/",
+      },
+    ];
+    this.setState({
+      images: images,
+    });
+  }
   render() {
     return (
       <div className="App">
